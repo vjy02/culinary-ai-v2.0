@@ -10,7 +10,7 @@ export default function ServerSidePage({ session, data }: { session: Session, da
   // populated on render without needing to go through a loading stage.
   return (
     <Layout>
-      <h1>Server Side Rendering</h1>
+      <h1>Test</h1>
       <p>
         This page uses the <strong>getServerSession()</strong> method in{" "}
         <strong>getServerSideProps()</strong>.
