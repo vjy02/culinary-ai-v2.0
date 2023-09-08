@@ -33,7 +33,6 @@ export default function ServerSidePage({ session, data }: { session: Session, da
     </Layout>
   )
 }
-
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     const session = await getServerSession(context.req, context.res, authOptions);
@@ -54,12 +53,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         },
       }
     }
+    return {
+      props: {
+        session: null, // Handle the error gracefully
+        data: null,
+      },
+    }
   } catch (error) {
     return {
       props: {
         session: null, // Handle the error gracefully
         data: null,
       },
-    };
+    }
   }
 }
