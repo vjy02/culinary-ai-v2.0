@@ -20,7 +20,6 @@ export default function ServerSidePage({ session: initialSession, data }: { sess
 
   async function submitPrompt(){
     const testData = {"title": "Scrambled Eggs11","instructions": "Put eggs11"}
-
     try{
       console.log(session)
       if (session && session.user){
@@ -40,7 +39,6 @@ export default function ServerSidePage({ session: initialSession, data }: { sess
       console.log("ERROR")
     }
   }
-
 
   return (
     <Layout>

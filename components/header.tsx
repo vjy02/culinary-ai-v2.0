@@ -2,7 +2,6 @@ import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
 
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
@@ -11,15 +10,6 @@ export default function Header() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
   const router = useRouter()
-
-  useEffect(()=>{
-    if (session?.user){
-      router.push("/server")
-    }
-    else{
-      router.push("/")
-    }
-  },[session])
 
   return (
     <header>
@@ -43,6 +33,7 @@ export default function Header() {
                 onClick={(e) => {
                   e.preventDefault()
                   signIn()
+                  router.push("/server")
                 }}
               >
                 Sign in
@@ -81,9 +72,11 @@ export default function Header() {
           <li className={styles.navItem}>
             <Link href="/">Home</Link>
           </li>
-          <li className={styles.navItem}>
-            <Link href="/server">Server</Link>
-          </li>
+          {session?.user && (
+            <li className={styles.navItem}>
+              <Link href="/server">Server</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

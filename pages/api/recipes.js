@@ -26,7 +26,6 @@ export default async function handler(req, res) {
       res.json({ status: 200, data: allPosts })
       break
     case "DELETE":
-      // Assuming the recipe ID is passed in the body, but you could also pass it as a query parameter
       let recipeId = req.body.recipeId
     
       let deleteResult = await db.collection("recipes").updateOne(
@@ -34,7 +33,7 @@ export default async function handler(req, res) {
         {
           $pull: {
             recipes: {
-              _id: new client.ObjectId(recipeId)  // Assuming recipeId is a string representation of MongoDB ObjectId
+              _id: new client.ObjectId(recipeId)  
             }
           }
         }
