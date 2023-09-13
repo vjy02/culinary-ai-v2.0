@@ -2,24 +2,16 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import Layout from "../components/layout"
 import { getSession } from "next-auth/react"
-import { useEffect, useState } from "react"
 
 import type { GetServerSidePropsContext } from "next"
 import type { Session } from "next-auth"
 
 
 export default function ServerSidePage({ session: initialSession, data }: { session: Session, data: any }) {
-  const [session, setSession] = useState<Session | null>(initialSession)
-
-  useEffect(() => {
-    // Fetch the session client-side and update the state
-    getSession().then(session => {
-      setSession(session);
-    });
-  }, []);
 
   async function submitPrompt(){
     const testData = {"title": "Scrambled Eggs11","instructions": "Put eggs11"}
+    const session = await getSession()
     try{
       console.log(session)
       if (session && session.user){
@@ -43,8 +35,6 @@ export default function ServerSidePage({ session: initialSession, data }: { sess
   return (
     <Layout>
       <h1>User Recipes</h1>
-      <button onClick={submitPrompt}>Test Submit</button>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </Layout>
   )
@@ -64,15 +54,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     let data = await res.json()
     return {
       props: {
-        session,
-        data,
-      },
+        data
+      }
     }
   }
   return {
     props: {
-      session: null, // Handle the error gracefully
-      data: null,
-    },
+      data: null
+    }
   }
 }

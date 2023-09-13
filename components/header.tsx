@@ -42,7 +42,6 @@ export default function Header() {
                 className={styles.buttonPrimary}
                 onClick={(e) => {
                   e.preventDefault()
-                  router.push("/generator")
                   signIn()
                 }}
               >
@@ -68,7 +67,6 @@ export default function Header() {
                 className={styles.button}
                 onClick={(e) => {
                   e.preventDefault()
-                  router.push("/")
                   signOut()
                 }}
               >
