@@ -4,7 +4,7 @@ export default function IndexPage() {
 
   return (
     <Layout>
-      <h1>Landing Page</h1>
+      <h1  className="text-4xl font-bold">Landing Page</h1>
       <p>
         This is the CulinaryAI landing page.
       </p>

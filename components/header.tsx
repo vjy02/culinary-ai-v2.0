@@ -26,7 +26,7 @@ export default function Header() {
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
       </noscript>
-      <div className={styles.signedInStatus}>
+      <div className={styles.header}>
         <p
           className={`nojs-show ${
             !session && loading ? styles.loading : styles.loaded
@@ -34,9 +34,6 @@ export default function Header() {
         >
           {!session && (
             <>
-              <span className={styles.notSignedInText}>
-                You are not signed in
-              </span>
               <a
                 href={`/api/auth/signin`}
                 className={styles.buttonPrimary}
@@ -51,17 +48,6 @@ export default function Header() {
           )}
           {session?.user && (
             <>
-              {session.user.image && (
-                <span
-                  style={{ backgroundImage: `url('${session.user.image}')` }}
-                  className={styles.avatar}
-                />
-              )}
-              <span className={styles.signedInText}>
-                <small>Signed in as</small>
-                <br />
-                <strong>{session.user.email ?? session.user.name}</strong>
-              </span>
               <a
                 href={`/api/auth/signout`}
                 className={styles.button}
@@ -75,8 +61,7 @@ export default function Header() {
             </>
           )}
         </p>
-      </div>
-      <nav>
+        <nav>
           {session?.user && (
           <ul className={styles.navItems}>
             <li className={styles.navItem}>
@@ -88,6 +73,7 @@ export default function Header() {
           </ul>
           )}
       </nav>
+      </div>
     </header>
   )
 }
