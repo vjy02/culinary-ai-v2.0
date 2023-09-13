@@ -42,24 +42,7 @@ export default function ServerSidePage({ session: initialSession, data }: { sess
 
   return (
     <Layout>
-      <h1>Test</h1>
-      <p>
-        This page uses the <strong>getServerSession()</strong> method in{" "}
-        <strong>getServerSideProps()</strong>.
-      </p>
-      <p>
-        Using <strong>getServerSession()</strong> in{" "}
-        <strong>getServerSideProps()</strong> is the recommended approach if you
-        need to support Server Side Rendering with authentication.
-      </p>
-      <p>
-        The advantage of Server Side Rendering is this page does not require
-        client side JavaScript.
-      </p>
-      <p>
-        The disadvantage of Server Side Rendering is that this page is slower to
-        render.
-      </p>
+      <h1>User Recipes</h1>
       <button onClick={submitPrompt}>Test Submit</button>
       <pre>{JSON.stringify(session, null, 2)}</pre>
       <pre>{JSON.stringify(data, null, 2)}</pre>
