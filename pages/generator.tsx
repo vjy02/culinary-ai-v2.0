@@ -7,7 +7,8 @@ export default function GeneratorPage() {
 
     const [input, setInput] = useState<String | ''>('')
     const [suggestions, setSuggestions] = useState<Array<String>>([])
-    const [ingridients, addIngridient] = useState<Array<String>>([])
+    const [ingredients, addingredient] = useState<Array<String>>([])
+    const [recipe, setRecipe] = useState<String>('')
 
     useEffect(() => {
         if (input !== ""){
@@ -28,29 +29,29 @@ export default function GeneratorPage() {
         }
     }
 
-  async function callSpoonacularAPI() {
-    if (input) {
-      try{
-        const response = await fetch(`https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=923b291dff704e07b3f2f0db15f83634&query=${input}&number=5`,
-        {
-          method: 'GET',
-        })
-        const data = await response.json()
-        const results = data.map((suggestion: { name: String }) => (
-          suggestion.name
-        ))
-        setSuggestions(results);
-      }
-      catch(err) {
-        console.error("Failed to fetch Spoonacular API", err)
-      }
-    } else {
-      setSuggestions([]);
-    }
-  }   
+    async function callSpoonacularAPI() {
+        if (input) {
+        try{
+            const response = await fetch(`https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=923b291dff704e07b3f2f0db15f83634&query=${input}&number=5`,
+                {
+                    method: 'GET',
+                })
+                    const data = await response.json()
+                    const results = data.map((suggestion: { name: String }) => (
+                    suggestion.name
+            ))
+            setSuggestions(results);
+        }
+        catch(err) {
+            console.error("Failed to fetch Spoonacular API", err)
+        }
+        } else {
+        setSuggestions([]);
+        }
+    }   
 
 
-    async function submitPrompt(){
+    async function submitRecipeToDb(){
         const testData = {"title": "Scrambled Eggs11","instructions": "Put eggs12"}
         try{
         const session = await getSession()
@@ -72,6 +73,48 @@ export default function GeneratorPage() {
         }
     }
 
+    async function fetchOpenApi(){
+        const APIBody = {
+          model: 'gpt-3.5-turbo-0613',
+          messages:[{"role":"user","content":
+            'Suggest 1 detailed recipe with specific quantities of each ingredients, using these ingredients:' +
+            ingredients.join(' ') +
+            //'. Also not suggest any of these banned recipes, \
+            //each of these banned recipes are seperated by a "//" \
+            //: ' + recipes + 'END OF LIST.\
+            'If you cant think of any recipe then return a recipe that uses at least one of the listed ingredients. \
+            Return with the following format:\
+            "Recipe Name: (insert recipe name)", then an empty line then ingredients header followed by ingredient \
+            list then another empty line then numbered instructions. Do not\
+            include other ingredients at the beginning of ur answer.'}],
+          temperature: 0,
+          max_tokens: 1000,
+          top_p: 1.0,
+          frequency_penalty: 0.0,
+          presence_penalty: 0.0,
+        }
+    
+        try{
+            const key = process.env.NEXT_PUBLIC_OPENAI_KEY
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + key,
+                },
+                body: JSON.stringify(APIBody),
+            })
+            const data = await response.json()
+
+            setRecipe(data.choices[0].message.content)
+
+        }
+        catch(err){
+          console.error("Failed to call OpenAi API", err)
+        }
+    }
+
+
     return (
         <Layout>
             <h1>Recipe Generator</h1>
@@ -91,7 +134,7 @@ export default function GeneratorPage() {
                             <div
                                 key = {i}
                                 onClick={() => {
-                                    addIngridient([...ingridients, suggestion])
+                                    addingredient([...ingredients, suggestion])
                                     setSuggestions([])
                                 }}
                             >
@@ -100,10 +143,10 @@ export default function GeneratorPage() {
                             ))}
                         </div>
                     )}
-                    <div id="ingridients">
-                        {ingridients.length > 0 && (
+                    <div id="ingredients">
+                        {ingredients.length > 0 && (
                             <div>
-                                {ingridients.map((item, i) => (
+                                {ingredients.map((item, i) => (
                                 <div
                                     key = {i}
                                 >
@@ -113,27 +156,11 @@ export default function GeneratorPage() {
                             </div>
                         )}
                     </div>
+                    <button onClick={fetchOpenApi}>Generate</button>
                 </div>
                 <div id="recipe-wrapper">
-                    <h3>Example Recipe</h3>
-                    <p>
-                        Ingredients: <br/>
-                        - 2 eggs  <br/>
-                        - 2 cups cooked white rice  <br/>
-                        - 2 tablespoons vegetable oil  <br/>
-                        - 1/2 teaspoon salt <br/>
-                        - 1/4 teaspoon ground black pepper <br/>
-                        - 2 tablespoons soy sauce <br/>
-                        <br/>
-                        Instructions: <br/>
-                        1. Crack the eggs into a bowl and whisk until combined. <br/>
-                        2. Heat the oil in a large skillet over medium-high heat. <br/>
-                        3. Add the eggs and cook, stirring occasionally, until scrambled and cooked through, about 3 minutes. <br/>
-                        4. Add the cooked rice, salt, pepper, and soy sauce. Stir to combine. <br/>
-                        5. Cook, stirring occasionally, until the rice is heated through, about 5 minutes. <br/>
-                        6. Serve hot.
-                    </p>
-                    <button onClick={submitPrompt}>Test Submit</button>
+                    <h3 className="whitespace-pre-wrap">{recipe}</h3>
+                    <button onClick={submitRecipeToDb}>Test Submit</button>
                 </div>
             </div>
         </Layout>
