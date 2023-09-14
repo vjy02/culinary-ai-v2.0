@@ -1,8 +1,10 @@
 /* Set min-height to avoid page reflow while session loading */
 
-.header{
+.loginHeader{
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
 }
 
 .avatar {
@@ -17,16 +19,12 @@
 
 .button,
 .buttonPrimary {
-  float: right;
-  margin-top: 1rem;
-  margin-right: -0.4rem;
   font-weight: 500;
   border-radius: 0.3rem;
   cursor: pointer;
   font-size: 1rem;
   line-height: 1.4rem;
   padding: 0.7rem 0.8rem;
-  position: relative;
   z-index: 10;
   background-color: transparent;
   color: #555;

@@ -3,6 +3,8 @@ import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import Image from 'next/image'
+import logoIcon from "../public/images/logo.svg"
 
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
@@ -26,7 +28,16 @@ export default function Header() {
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
       </noscript>
-      <div className={styles.header}>
+      <div className={styles.loginHeader}>
+
+        <Image
+            src={logoIcon}
+            height={50}
+            width={50}
+            alt="logo"
+        />
+
+
         <p
           className={`nojs-show ${
             !session && loading ? styles.loading : styles.loaded
@@ -61,7 +72,8 @@ export default function Header() {
             </>
           )}
         </p>
-        <nav>
+      </div>
+      <nav>
           {session?.user && (
           <ul className={styles.navItems}>
             <li className={styles.navItem}>
@@ -73,7 +85,6 @@ export default function Header() {
           </ul>
           )}
       </nav>
-      </div>
     </header>
   )
 }
