@@ -14,7 +14,7 @@ export default async function handler(req, res) {
           $push: {
             recipes: {
               title: recipeObject.title,
-              instructions: recipeObject.instructions
+              content: recipeObject.content
             }
           }
         }

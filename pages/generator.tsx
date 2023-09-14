@@ -52,7 +52,13 @@ export default function GeneratorPage() {
 
 
     async function submitRecipeToDb(){
-        const testData = {"title": "Scrambled Eggs11","instructions": "Put eggs12"}
+        const titleRegex = /^Recipe Name: (.+?)$/m
+        const match = recipe.match(titleRegex)
+
+        const title = match ? match[1] : ''  // if match found, title will have the recipe name, otherwise it'll be an empty string
+
+        const testData = {"title": `${title}`,"content": recipe}
+        console.log(testData)
         try{
         const session = await getSession()
         if (session && session.user){
