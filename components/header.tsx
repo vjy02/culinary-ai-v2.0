@@ -39,10 +39,10 @@ export default function Header() {
         ) :
         (
           <Image
-          src={logoIcon}
-          height={50}
-          width={50}
-          alt="logo"
+            src={logoIcon}
+            height={50}
+            width={50}
+            alt="logo"
            />
         )}
 

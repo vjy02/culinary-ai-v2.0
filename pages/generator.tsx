@@ -57,7 +57,7 @@ export default function GeneratorPage() {
 
         const title = match ? match[1] : ''  // if match found, title will have the recipe name, otherwise it'll be an empty string
 
-        const testData = {"title": `${title}`,"content": recipe}
+        const testData = {"title": title,"content": recipe}
         console.log(testData)
         try{
         const session = await getSession()

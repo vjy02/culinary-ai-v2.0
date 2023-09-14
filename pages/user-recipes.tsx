@@ -1,41 +1,22 @@
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import Layout from "../components/layout"
-import { getSession } from "next-auth/react"
 
 import type { GetServerSidePropsContext } from "next"
 import type { Session } from "next-auth"
 
 
-export default function ServerSidePage({ session: initialSession, data }: { session: Session, data: any }) {
-
-  async function submitPrompt(){
-    const testData = {"title": "Scrambled Eggs11","instructions": "Put eggs11"}
-    const session = await getSession()
-    try{
-      console.log(session)
-      if (session && session.user){
-        console.log("OK")
-        const userEmail = session.user.email
-        let res = await fetch(`http://localhost:3000/api/recipes?userEmail=${userEmail}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(testData) 
-        })
-        await res.json()
-      }
-    }
-    catch{
-      console.log("ERROR")
-    }
-  }
+export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
       <h1>User Recipes</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
+      <div>
+        {data.data[0].recipes.map((item: { content: any }) => {
+          return (<h3 className="whitespace-pre-wrap">{item.content}</h3>)
+        })}
+      </div>
     </Layout>
   )
 }
@@ -54,7 +35,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     let data = await res.json()
     return {
       props: {
-        data
+        data,
+        userEmail
       }
     }
   }
