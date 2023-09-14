@@ -29,13 +29,22 @@ export default function Header() {
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
       </noscript>
       <div className={styles.loginHeader}>
-
-        <Image
-            src={logoIcon}
-            height={50}
-            width={50}
-            alt="logo"
-        />
+        {(session && session.user && session.user.image) ? (
+          <Image
+              src={session.user.image}
+              height={50}
+              width={50}
+              alt="logo"
+          />
+        ) :
+        (
+          <Image
+          src={logoIcon}
+          height={50}
+          width={50}
+          alt="logo"
+           />
+        )}
 
 
         <p
