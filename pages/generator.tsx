@@ -90,7 +90,7 @@ export default function GeneratorPage() {
             //: ' + recipes + 'END OF LIST.\
             'If you cant think of any recipe then return a recipe that uses at least one of the listed ingredients. \
             Return with the following format:\
-            "Recipe Name: (insert recipe name)", then an empty line then ingredients header followed by ingredient \
+            The recipe name, then an empty line then ingredients header followed by ingredient \
             list then another empty line then numbered instructions. Do not\
             include other ingredients at the beginning of ur answer.'}],
           temperature: 0,
