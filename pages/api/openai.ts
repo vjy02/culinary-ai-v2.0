@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 Authorization: 'Bearer ' + process.env.OPENAI_KEY,
             },
             body: JSON.stringify(APIBody),
-        });
+        })
 
         const data = await response.json()
         res.status(200).json(data.choices[0].message.content)

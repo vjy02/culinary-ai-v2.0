@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import type { GetServerSidePropsContext } from "next"
 
 type Recipe = {
-  content: string;
+  content: string
 }
 
 export default function ServerSidePage({ data }: { data: any }) {

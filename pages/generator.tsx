@@ -30,7 +30,7 @@ export default function GeneratorPage() {
         setInput(inputValue)
         if (!(/^[A-Za-z ]*$/.test(inputValue))) {
             setInput(inputValue.substring(0, inputValue.length - 1))
-            alert('Please enter only letters or space');
+            alert('Please enter only letters or space')
         } 
     }
 

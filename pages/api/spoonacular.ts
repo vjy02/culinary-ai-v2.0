@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (!input) {
     res.status(400).json({ error: 'input is required as a query parameter.' })
-    return;
+    return
   }
 
   try {
