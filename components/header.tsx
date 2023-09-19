@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Image from 'next/image'
 import logoIcon from "../public/images/logo.svg"
+import { usePathname } from 'next/navigation'
 
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
@@ -13,6 +14,7 @@ export default function Header() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
   const router = useRouter()
+  const currentRoute = usePathname()
 
   useEffect(() => {
     if (session && router.pathname === "/"){
@@ -86,10 +88,20 @@ export default function Header() {
           {session?.user && (
           <ul className={styles.navItems}>
             <li className={styles.navItem}>
-              <Link href="/generator">Generator</Link>
+              <Link href="/generator" 
+                className={currentRoute === "/generator" 
+                  ? "underline underline-offset-4 decoration-2" 
+                  : ""}>
+                    Generator
+              </Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/user-recipes">My Recipes</Link>
+              <Link href="/user-recipes" 
+                className={currentRoute === "/user-recipes" 
+                  ? "underline underline-offset-4 decoration-2" 
+                  : ""}>
+                    Generator
+              </Link>
             </li>
           </ul>
           )}

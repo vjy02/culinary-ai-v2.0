@@ -1,32 +1,31 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react"
 import Layout from "../components/layout"
 import { getSession } from "next-auth/react"
-import type { Session } from "next-auth"
 
 export default function GeneratorPage() {
 
-    const [input, setInput] = useState<String | ''>('')
-    const [suggestions, setSuggestions] = useState<Array<String>>([])
-    const [ingredients, addingredient] = useState<Array<String>>([])
-    const [recipe, setRecipe] = useState<String>('')
+    const [input, setInput] = useState<string>('')
+    const [suggestions, setSuggestions] = useState<Array<string>>([])
+    const [ingredients, addingredient] = useState<Array<string>>([])
+    const [recipe, setRecipe] = useState<string>('')
 
     useEffect(() => {
         if (input !== ""){
-        callSpoonacularAPI();
+            callSpoonacularAPI();
         }
         else{
-        setSuggestions([])
+            setSuggestions([])
         }
     }, [input])
 
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-        const inputValue = event.target.value;
-        if (/^[A-Za-z ]*$/.test(inputValue)) {
-        setInput(inputValue);
-        } else {
-        alert('Please enter only letters or space');
-        }
+        const inputValue = event.target.value
+        setInput(inputValue)
+        if (!(/^[A-Za-z ]*$/.test(inputValue))) {
+            setInput(inputValue.substring(0, inputValue.length - 1))
+            alert('Please enter only letters or space');
+        } 
     }
 
     async function callSpoonacularAPI() {
@@ -123,52 +122,70 @@ export default function GeneratorPage() {
 
     return (
         <Layout>
-            <h1>Recipe Generator</h1>
-            <div id="generator-wrapper">
-                <div id="input-wrapper">
-                    <div id="search-wrapper">
+            <div 
+                id="generator-wrapper" 
+                className="flex flex-col min-h-[40vh] justify-between ml-auto border-2 border-black-500 rounded-lg p-7 pb-2 bg-white"
+            >
+                <div 
+                    id="input-wrapper" 
+                    className="relative justify-between flex flex-col h-[20vh]"
+                >
+                    <div id="search-wrapper" className="relative flex items-center">
                         <input
                             type="text"
                             placeholder="Enter a food item"
-                            onChange={(e)=>handleInput(e)}
-                            />
-                        <button>Add</button>
-                    </div>
-                    {suggestions.length > 0 && (
-                        <div>
-                            {suggestions.map((suggestion, i) => (
-                            <div
-                                key = {i}
-                                onClick={() => {
-                                    addingredient([...ingredients, suggestion])
-                                    setSuggestions([])
-                                }}
-                            >
-                                {suggestion}
-                            </div>
-                            ))}
-                        </div>
-                    )}
-                    <div id="ingredients">
-                        {ingredients.length > 0 && (
-                            <div>
-                                {ingredients.map((item, i) => (
-                                <div
-                                    key = {i}
-                                >
-                                    {item}
-                                </div>
+                            value={input}
+                            onChange={(e) => handleInput(e)}
+                            className="py-2 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+                        />
+                        {suggestions.length > 0 && (
+                            <div className="suggestions absolute top-9 left-0 bg-white rounded-lg border border-gray-300 mt-1 ">
+                                {suggestions.map((suggestion, i) => (
+                                    <div
+                                        className="bg-slate-100 px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                        key={i}
+                                        onClick={() => {
+                                            addingredient([...ingredients, suggestion])
+                                            setSuggestions([])
+                                        }}
+                                    >
+                                        {suggestion}
+                                    </div>
                                 ))}
                             </div>
                         )}
                     </div>
-                    <button onClick={fetchOpenApi}>Generate</button>
+                    <div id="ingredients" className="absolute right-20 max-w-[40%]">
+                        <h3 className="text-xl font-bold mb-2">Selected Items:</h3>
+                        {ingredients.length > 0 && (
+                            <div className="grid">
+                                <ul className="list-disc list-inside mb-4">
+                                    {ingredients.map((item, i) => (
+                                        <li key={i} className="flex items-center mt-2">
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                 </div>
-                <div id="recipe-wrapper">
-                    <h3 className="whitespace-pre-wrap">{recipe}</h3>
-                    <button onClick={submitRecipeToDb}>Test Submit</button>
-                </div>
+                <button 
+                    onClick={fetchOpenApi} 
+                    className="place-self-center py-2 px-4 rounded-lg mb-4 rounded-lg border border-gray-300"
+                >
+                    Generate
+                </button>
             </div>
+            {recipe && (
+                <div 
+                    id="recipe-wrapper" 
+                    className="flex flex-col items-center self-center"
+                >
+                    <h3 className="whitespace-pre-wrap">{recipe}</h3>
+                    <button onClick={submitRecipeToDb} className="py-2 px-4 rounded-lg border border-gray-300">Test Submit</button>
+                </div>
+            )}
         </Layout>
     )
 }

@@ -35,25 +35,4 @@ iframe {
   filter: invert(1);
 }
 
-#generator-wrapper{
-  display: flex;
-  flex-direction: column;
-  min-height: 50vh;
-}
 
-#input-wrapper{
-  height: 20vh;
-  border: solid black 1px;
-  display: flex;
-  flex-direction: column;
-}
-
-#recipe-wrapper{
-  border: solid black 1px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: center;
-  width: 85%;
-  padding: 0px 30px;
-}
