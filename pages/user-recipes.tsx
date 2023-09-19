@@ -12,13 +12,13 @@ export default function ServerSidePage({ data }: { data: any }) {
   let savedRecipes: Recipe[] | null = null
   let noRecipes: string | null = null
 
-  if (data.data.length !== 0){
+  if (data !== null && data.data.length !== 0){
     savedRecipes = data.data[0].recipes
   }
   else{
     noRecipes = "No recipes saved! Generate a recipe and click save for it to appear"
   }
-  console.log(savedRecipes)
+
   return (
     <Layout>
       <h1>User Recipes</h1>

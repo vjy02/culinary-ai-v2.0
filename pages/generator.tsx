@@ -2,6 +2,7 @@
     TODO (Last Updated: 20/09/2023)
 
     ✅ Handle API calls in api folder files to prevent API_KEY data from being accessible to users **IMPORTANT**
+    ❌ Add removing ingredients on generator page
     ❌ Set styling for saved recipes
     ❌ Print all saved recipes or certain recipe functionality
     ❌ Style and flesh out landing page
@@ -39,7 +40,6 @@ export default function GeneratorPage() {
             const res = await fetch(`http://localhost:3000/api/spoonacular?input=${input}`)
             
             if (!res.ok) {
-                console.log("failed")
                 throw new Error('Failed to fetch ingredient suggestions')
             }
             const suggestions = await res.json()
@@ -52,9 +52,7 @@ export default function GeneratorPage() {
 
 
     async function submitRecipeToDb(){
-        const titleRegex = /^Recipe Name: (.+?)$/m
-        const match = recipe.match(titleRegex)
-        const title = match ? match[1] : ''  // if match found, title will have the recipe name, otherwise it'll be an empty string
+        const title = recipe.split('\n')[0]
         const testData = {"title": title,"content": recipe}
 
         try{
@@ -71,8 +69,8 @@ export default function GeneratorPage() {
                 await res.json()
             }
         }
-        catch{
-         console.log("ERROR")
+        catch (err) {
+            console.error("Error posting recipe to MongoDB", err)
         }
     }
 

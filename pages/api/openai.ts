@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     }
-    console.log(ingredients)
+
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
