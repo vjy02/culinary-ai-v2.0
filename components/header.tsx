@@ -100,7 +100,7 @@ export default function Header() {
                 className={currentRoute === "/user-recipes" 
                   ? "underline underline-offset-4 decoration-2" 
                   : ""}>
-                    Generator
+                    My Recipes
               </Link>
             </li>
           </ul>
