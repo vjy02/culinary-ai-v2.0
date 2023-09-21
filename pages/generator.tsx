@@ -2,8 +2,10 @@
     TODO (Last Updated: 20/09/2023)
 
     ✅ Handle API calls in api folder files to prevent API_KEY data from being accessible to users **IMPORTANT**
-    ❌ Add removing ingredients on generator page
-    ❌ Set styling for saved recipes
+    ✅ Add removing ingredients on generator page
+    ⏰ Set styling for saved recipes
+    ⏰ Create some preset buttons for vegan, meat only, vegetarian, etc.
+    ⏰ Create on the space below on desktop, option to print, save to profile or random recipe (this will fill ingrideint list and generate)
     ❌ Print all saved recipes or certain recipe functionality
     ❌ Style and flesh out landing page
 */
