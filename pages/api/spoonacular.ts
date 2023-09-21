@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const response = await fetch(`https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.SPOONACULAR_KEY}&query=${input}&number=5`)
+    const response = await fetch(`https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=${process.env.SPOONACULAR_KEY}&query=${input}&number=15`)
 
     if (!response.ok) {
       throw new Error('Failed to fetch Spoonacular API')

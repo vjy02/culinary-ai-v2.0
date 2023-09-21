@@ -17,12 +17,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               Return with the following format: Only the recipe name (no prefix please), then an empty line then ingredients header 
               followed by ingredient list then another empty line then numbered instructions. Do not include 
               other ingredients at the beginning of your answer.`
+
         }],
-        temperature: 0,
+        temperature: 0.7,
         max_tokens: 1000,
-        top_p: 1.0,
-        frequency_penalty: 0.0,
-        presence_penalty: 0.0,
+        top_p: 0.9,
+        frequency_penalty: -0.2,
+        presence_penalty: 0.2,
     }
 
     try {
