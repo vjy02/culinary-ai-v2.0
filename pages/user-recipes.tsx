@@ -6,6 +6,7 @@ import type { GetServerSidePropsContext } from "next"
 
 type Recipe = {
   content: string
+  title: string
 }
 
 export default function ServerSidePage({ data }: { data: any }) {
@@ -21,14 +22,17 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
-      <h1>User Recipes</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
       <div>
-        {savedRecipes !== null ? (savedRecipes.map((item: { content: string}) => {
-          return (<h3 className="whitespace-pre-wrap">{item.content}</h3>)
+        {savedRecipes !== null ? (savedRecipes.map((item: { content: string, title: string}) => {
+          return (
+            <details>
+              <summary className="cursor-pointer">{item.title}</summary>
+              <h3 className="whitespace-pre-wrap">{item.content}</h3>
+            </details>
+          )
         }))
         :
-        noRecipes
+        <h2>{noRecipes}</h2>
         }
       </div>
     </Layout>

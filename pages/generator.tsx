@@ -148,12 +148,15 @@ export default function GeneratorPage() {
                                         {ingredients.map((item, i) => (
                                             <li key={i} className="flex items-center mt-2 justify-between">
                                                 {item}
-                                                <div onClick={()=>{
-                                                    const curList = [...ingredients]
-                                                    curList.splice(curList.indexOf(item), 1)
-                                                    console.log(curList)
-                                                    setIngredients(curList)
-                                                }}>
+                                                <div 
+                                                    className="cursor-pointer"
+                                                    onClick={()=>{
+                                                        const curList = [...ingredients]
+                                                        curList.splice(curList.indexOf(item), 1)
+                                                        console.log(curList)
+                                                        setIngredients(curList)
+                                                    }}
+                                                >
                                                     ❌
                                                 </div>
                                             </li>
