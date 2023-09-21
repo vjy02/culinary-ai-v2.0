@@ -3,9 +3,9 @@ import type { ReactNode } from "react"
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <>
-      <Header />
-      <main>{children}</main>
-    </>
+    <div className="lg:flex lg:flex-col lg:justify-center lg:w-[80vw] lg:m-auto">
+        <Header />
+        <main>{children}</main>
+    </div>
   )
 }

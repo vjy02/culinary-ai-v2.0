@@ -101,16 +101,16 @@ export default function GeneratorPage() {
     
     return (
         <Layout>
-            <div>
+            <div className="lg:flex-row lg:flex ">
                 <div 
                     id="generator-wrapper" 
-                    className="flex flex-col min-h-[40vh] justify-between ml-auto border-2 border-black-500 rounded-lg p-7 pb-2 bg-white"
+                    className="flex flex-col min-h-[40vh] justify-between ml-auto border-2 border-black-500 rounded-lg p-7 pb-2 bg-white lg:w-[50%] lg:max-h-[45vh]"
                 >
                     <div 
                         id="input-wrapper" 
-                        className="relative justify-between flex flex-col h-[20vh]"
+                        className="relative justify-between items-start flex h-[20vh] w-[90%] lg:h-[50vh]"
                     >
-                        <div id="search-wrapper" className="relative flex items-center">
+                        <div id="search-wrapper" className="self-start flex items-center lg:w-[60%]">
                             <input
                                 type="text"
                                 placeholder="Enter a food item"
@@ -141,11 +141,11 @@ export default function GeneratorPage() {
                                 </div>
                             )}
                         </div>
-                        <div id="ingredients" className="absolute left-80 max-w-[40%]">
+                        <div id="ingredients" className="lg:flex lg:flex-col lg:w-[45%]">
                             <h3 className="text-xl font-bold mb-2">Selected Items:</h3>
                             {ingredients.length > 0 && (
-                                <div className="grid">
-                                    <ul className="list-disc list-inside mb-4">
+                                <div className="grid lg:overflow-auto lg:h-[30vh]">
+                                    <ul className="list-disc list-inside mb-4 lg:overflow-auto">
                                         {ingredients.map((item, i) => (
                                             <li key={i} className="flex items-center mt-2 justify-between">
                                                 {item}
@@ -174,26 +174,27 @@ export default function GeneratorPage() {
                         Generate
                     </button>
                 </div>
-                <div className="flex justify-center items-center w-full h-full mt-10">
+                <div className="flex justify-center items-center mt-10 lg:w-[50%] lg:mt-0">
                     {loading && (
-                            <div className="flex justify-center items-end mt-20">
-                                <Puff
-                                color="#85f876"
-                                height={100}
-                                width={100}
-                                />
-                            </div>)
-                    }
+                        <div>
+                            <Puff
+                            color="#85f876"
+                            height={100}
+                            width={100}
+                            />
+                        </div>
+                    )}
                     {recipe && (
                         <div 
                             id="recipe-wrapper" 
-                            className="flex flex-col items-center self-center w-3/4 p-10 rounded-lg border border-gray-300 gap-10"
+                            className="flex flex-col items-center self-center w-3/4 p-10 rounded-lg border border-gray-300 gap-10 lg:self-start lg:overflow-auto lg:max-h-[40vw]"
                         >
-                            <h3 className="whitespace-pre-wrap">{recipe}</h3>
+                            <h4 className="whitespace-pre-wrap">{recipe}</h4>
                             <button onClick={submitRecipeToDb} className="py-2 px-4 rounded-lg border border-gray-300">Test Submit</button>
                         </div>
                     )}
                 </div>
+
             </div>
         </Layout>
     )
