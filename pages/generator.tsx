@@ -55,8 +55,9 @@ export default function GeneratorPage() {
     }
 
     async function submitRecipeToDb(){
-        const title = recipe.split('\n')[0]
-        const testData = {"title": title,"content": recipe}
+        const title = recipe.split('\n')[0].split(':')[1]
+        const updatedRecipe = recipe.split('\n')[0].split(':')[1] + "\n" + recipe.split('\n').slice(1,recipe.split('\n').length).join('\n')
+        const testData = {"title": title,"content": updatedRecipe}
 
         try{
             const session = await getSession()
@@ -245,7 +246,7 @@ export default function GeneratorPage() {
                         )}
                         {recipe && (
                                 <div className="whitespace-pre-wrap rounded-lg border border-gray-300 p-10 lg:w-[80%] lg:overflow-auto lg:h-[80vh]">
-                                    <h2 className="text-xl font-bold">{recipe.split('\n')[0]}</h2>
+                                    <h2 className="text-xl font-bold">{recipe.split('\n')[0].split(':')[1]}</h2>
                                     <p>{recipe.split('\n').splice(1,recipe.length-1).join('\n')}</p>
                                 </div>
                         )}

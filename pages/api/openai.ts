@@ -12,14 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         messages: [{
             "role": "user",
             "content": 'Suggest 1 detailed recipe with specific quantities of each ingredients, using these ingredients:' 
-            + ingredients.join(' ') +
-             `If you cant think of any recipe then return a recipe that uses at least one of the listed ingredients.
-              Return with the following format: Only the recipe name (no prefix please), then an empty line then ingredients header 
-              followed by ingredient list then another empty line then numbered instructions. Do not include 
-              other ingredients at the beginning of your answer.`
+            + ingredients.join(', ') +
+             `. If you cant think of any recipe then return a recipe that uses at least one of the listed ingredients. If I gave you no ingredients, think of some random ingredients to include.
+              Return with the following format: recipe: recipe name, then an empty line then Ingredients header 
+              followed by ingredient list then another empty line then numbered Instructions. Use Australian measurements.`
 
         }],
-        temperature: 0.7,
+        temperature: 0.5,
         max_tokens: 1000,
         top_p: 0.9,
         frequency_penalty: -0.2,
