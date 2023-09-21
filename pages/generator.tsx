@@ -39,7 +39,8 @@ export default function GeneratorPage() {
     async function getSuggestedIngredients() {
 
         if (input){
-            const res = await fetch(`http://localhost:3000/api/spoonacular?input=${input}`)
+            console.log(`${process.env.NEXT_PUBLIC_URL}/api/spoonacular?input=${input}`)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/spoonacular?input=${input}`)
             
             if (!res.ok) {
                 throw new Error('Failed to fetch ingredient suggestions')
@@ -59,7 +60,7 @@ export default function GeneratorPage() {
             const session = await getSession()
             if (session && session.user){
                 const userEmail = session.user.email
-                let res = await fetch(`http://localhost:3000/api/recipes?userEmail=${userEmail}`, {
+                let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -78,7 +79,7 @@ export default function GeneratorPage() {
         try {
             setRecipe('')
             setLoading(true)
-            const res = await fetch("http://localhost:3000/api/openai", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/openai`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

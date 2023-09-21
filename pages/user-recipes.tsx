@@ -44,7 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   if (session && session.user){
     const userEmail = session.user.email
-    let res = await fetch(`http://localhost:3000/api/recipes?userEmail=${userEmail}`, {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
