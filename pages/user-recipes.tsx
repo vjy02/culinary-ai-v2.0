@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import type { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 type Recipe = {
   _id: string;
@@ -15,6 +17,7 @@ type Recipe = {
 export default function ServerSidePage({ data }: { data: any }) {
   const initialRecipes = data && data.data.length !== 0 ? data.data[0].recipes : [];
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
+  const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
 
   async function deleteRecipeFromDb(index: number) {
     const testData = { index: index };
@@ -47,24 +50,31 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center border border-gray-300 overflow-auto">
-        {savedRecipes.length > 0 ? (
-          savedRecipes.map((item: Recipe, i: number) => {
-            return (
-              <details key={i}>
-                <summary className="cursor-pointer">{item.title}</summary>
-                <h3 className="whitespace-pre-wrap">{item.content}</h3>
-                <button onClick={() => deleteRecipeFromDb(i)}>
-                  Test Delete
-                </button>
-              </details>
-            );
-          })
-        ) : (
-          <h2>
-            No recipes saved! Generate a recipe and click save for it to appear
-          </h2>
-        )}
+      <div className="flex items-start justify-between h-[80vh]">
+        <div className="flex flex-col md:w-[40%] rounded-lg border border-gray-300">
+          {savedRecipes.length > 0 ? (
+            savedRecipes.map((item: Recipe, i: number) => {
+              return (
+                <div className="flex">
+                  <button onClick={()=>{setRecipe(item)}}>{item.title}</button>
+                  <button onClick={()=>deleteRecipeFromDb(i)}><FontAwesomeIcon icon={faTrashCan} /></button>
+                </div>
+              );
+            })
+          ) : (
+            <h2>
+              No recipes saved! Generate a recipe and click save for it to appear
+            </h2>
+          )}
+        </div>
+        <div className="h-[100%] md:w-[40%] ">
+          <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto md:max-h-[80vh]">
+                <div className="whitespace-pre-wrap p-10">
+                    <h2 className="text-xl xl:text-2xl font-bold">{curRecipe.title}</h2>
+                    <p>{curRecipe.content.split('\n').splice(1, curRecipe.content.length - 1).join('\n')}</p>
+                </div>
+            </div>
+        </div>
       </div>
     </Layout>
   );

@@ -208,7 +208,7 @@ export default function GeneratorPage () {
                         onClick={submitRecipeToDb}
                         className="py-2 px-4 rounded-lg border border-gray-300 text-l"
                     >
-                        💾 <br></br>Save Recipe
+                        💾 <br></br>Save 
                     </button>
                     <button
                         onClick={fetchOpenApi}

@@ -18,9 +18,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             `. Make sure the recipe is ${diet}, but don't name the recipe like ${diet} followed by recipe name.` +
             `. If I gave you no ingredients, think of some random ingredients to include.
                 Return with the following format: recipe: recipe name, then an empty line then Ingredients header 
-                followed by ingredient list then another empty line then numbered Instructions. Use Australian measurements.`,
+                followed by ingredient list then another empty line then numbered Instructions, seperate each instruction step with an empty line. Use Australian measurements.`,
     },],
-    temperature: 0.5,
+    temperature: 0.7,
     max_tokens: 1000,
     top_p: 0.9,
     frequency_penalty: -0.2,
