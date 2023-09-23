@@ -33,6 +33,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.json({ status: 200, data: allPosts })
       break
 
-    //case "DELETE":
-  }
+      case "DELETE":
+        const { index } = req.body
+    
+        // First, set the recipe at the specified index to null
+        const unsetResult = await db.collection("recipes").updateOne(
+            { email: userEmail as string },
+            {
+                $unset: {
+                    [`recipes.${index}`]: 1
+                }
+            }
+        )
+    
+        // Then, remove the null value
+        const pullResult = await db.collection("recipes").updateOne(
+            { email: userEmail as string },
+            {
+                $pull: {
+                    recipes: null
+                }
+            }
+        )
+    
+        if (pullResult.modifiedCount === 0) {
+            res.json({ status: 404, message: "Recipe not found or not deleted." });
+        } else {
+            res.json({ status: 200, message: "Recipe deleted successfully." });
+        }
+        break
+    }    
 }

@@ -1,16 +1,3 @@
-/*
-    TODO (Last Updated: 22/09/2023)
-
-    ✅ Handle API calls in api folder files to prevent API_KEY data from being accessible to users **IMPORTANT**
-    ✅ Add removing ingredients on generator page
-    ✅ Create some preset buttons for vegan, meat only, vegetarian, etc.
-    ⏰ Set styling for saved recipes
-    ⏰ Create functionality for print and diet options
-    ❌ Print all saved recipes or certain recipe functionality
-    ❌ Style and flesh out landing page
-*/
-
-
 import { useState, useEffect, ChangeEvent, useRef } from "react"
 import Layout from "../components/layout"
 import { getSession } from "next-auth/react"
@@ -58,8 +45,8 @@ export default function GeneratorPage() {
     }
 
     async function submitRecipeToDb(){
-        const title = recipe.split('\n')[0].split(' : ')[1]
-        const updatedRecipe = recipe.split('\n')[0].split(' : ')[1] + "\n" + recipe.split('\n').slice(1,recipe.split('\n').length).join('\n')
+        const title = recipe.split('\n')[0].split(': ')[1]
+        const updatedRecipe = recipe.split('\n')[0].split(': ')[1] + "\n" + recipe.split('\n').slice(1,recipe.split('\n').length).join('\n')
         const testData = {"title": title,"content": updatedRecipe}
 
         try{
@@ -107,25 +94,25 @@ export default function GeneratorPage() {
     
     return (
         <Layout>
-            <div className="lg:flex-row flex flex-col justify-between text-m sm:text-md md:text-lg">
+            <div className="md:flex-row flex flex-col justify-between text-m sm:text-md sm:border sm:border-grey-300 md:border-none md:text-lg">
                 <div 
                     id="generator-wrapper" 
-                    className="flex flex-col justify-between items-center lg:justify-around bg-white pb-5 h-[110vh] lg:pb-0 lg:w-[50%] lg:h-[80vh] border-2 border-black-500 rounded-lg"
+                    className="flex flex-col justify-between items-center md:justify-around bg-white pb-5 h-[110vh] md:pb-0 md:w-[50%] md:h-[80vh] border-2 border-black-500 rounded-lg"
                 >
                     <div 
                         id="input-wrapper" 
-                        className="relative items-around justify-between flex flex-col md:flex-row h-[75%] p-7 w-[100%] lg:h-[70%]"
+                        className="relative items-around justify-between flex flex-col md:flex-row h-[75%] p-7 w-[100%] md:h-[70%]"
 
                     >
-                        <div id="search-wrapper" className="self-start flex items-start justify-between flex-col h-[20%] w-[100%] lg:h-[90%] lg:w-[40%]">
+                        <div id="search-wrapper" className="self-start flex items-start justify-between flex-col h-[20%] w-[100%] md:h-[90%] md:w-[40%]">
                             <input
                                 type="text"
                                 placeholder="Enter a food item"
                                 value={input}
                                 onChange={(e) => handleInput(e)}
-                                className="py-2 px-3 rounded-lg border border-gray-300 mb-4 focus:outline-none focus:ring focus:ring-blue-500 lg:w-[70%]"
+                                className="py-2 px-3 rounded-lg border border-gray-300 mb-4 focus:outline-none focus:ring focus:ring-blue-500 md:w-[70%]"
                             />
-                            <div className="overflow-auto min-h-[100%] w-[100%] lg:w-[90%] bg-white rounded-lg border border-gray-300 p-2 space-y-2">
+                            <div className="overflow-auto min-h-[100%] w-[100%] md:w-[90%] bg-white rounded-lg border border-gray-300 p-2 space-y-2">
                                 {suggestions.length > 0 && (
                                     <div className="flex flex-wrap gap-2 p-2">
                                         {suggestions.map((suggestion, i) => (
@@ -148,9 +135,9 @@ export default function GeneratorPage() {
                                 )}
                             </div>
                         </div>
-                        <div id="ingredients" className="flex items-start justify-between flex-col h-[25%] w-[100%] lg:h-[90%] lg:w-[50%]">
-                            <h3 className=" text-xl xl:text-2xl font-bold mb-4 lg:mb-8 lg:mt-0">Selected Items:</h3>
-                            <div className="overflow-auto border border-gray-300 min-h-[100%] w-[100%] lg:w-[90%] bg-white rounded-lg">
+                        <div id="ingredients" className="flex items-start justify-between flex-col h-[20%] w-[100%] md:h-[90%] md:w-[50%]">
+                            <h3 className=" text-xl xl:text-2xl font-bold mb-4 md:mb-8 md:mt-0">Selected Items:</h3>
+                            <div className="overflow-auto border border-gray-300 min-h-[100%] w-[100%] md:w-[90%] bg-white rounded-lg">
                                 <div className="grid overflow-auto p-2 space-y-2">
                                     {ingredients.length > 0 && (
                                         <div className="flex flex-wrap gap-2 p-2">
@@ -173,7 +160,7 @@ export default function GeneratorPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="self-center lg:self-center grid grid-rows-2 grid-cols-2 gap-5 lg:flex lg:flex-col justify-center lg:h-[100%]">
+                        <div className="self-center md:self-center grid grid-rows-2 grid-cols-2 gap-5 h-[30%] md:flex md:flex-col justify-center md:h-[100%]">
                                 <button 
                                     className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegan' ? 'bg-blue-500 text-white' : ''}`}
                                     onClick={() => {
@@ -208,7 +195,7 @@ export default function GeneratorPage() {
                                 </button>
                         </div>
                     </div>
-                    <div className="grid grid-rows-2 grid-cols-2 gap-5 lg:grid-cols-4 lg:grid-rows-1 lg:gap-5 lg:w-[90%] lg:h-[15%] rounded-lg">
+                    <div className="grid grid-rows-2 grid-cols-2 gap-5 md:grid-cols-4 md:grid-rows-1 md:gap-5 md:w-[90%] md:h-[15%] rounded-lg">
                         <button 
                             className="py-2 px-4 rounded-lg border border-gray-300 text-l"
                             onClick={()=>{
@@ -236,21 +223,21 @@ export default function GeneratorPage() {
                         </button>
                     </div>
                 </div>
-                <div className="flex mt-10  lg:w-[50%] lg:mt-0">
+                <div className="flex mt-10  md:w-[50%] md:mt-0">
                     <div 
                         id="recipe-wrapper" 
-                        className="flex flex-col items-end gap-10 lg:self-start lg:w-[100%]"
+                        className="flex flex-col items-end gap-10 md:self-start md:w-[100%]"
                     >
                         {
                             !loading && !recipe &&(
-                                <h4 className="whitespace-pre-wrap lg:w-[80%] lg:max-h-[80vh] rounded-lg border border-gray-300 p-10 lg:overflow-auto" >
+                                <div className="whitespace-pre-wrap md:w-[80%] md:max-h-[80vh] rounded-lg border border-gray-300 p-10 md:overflow-auto" >
                                     <h2 className="text-xl xl:text-2xl font-bold">Example Recipe</h2>
                                     {"\nIngredients:\n- 2 units of main ingredient\n- 1 cup of secondary ingredient\n- 1/2 cup of flavor ingredient A\n- 1/2 teaspoon of spice A\n- 1/2 teaspoon of spice B\n- 1/4 teaspoon of seasoning A\n- 1/4 teaspoon of seasoning B\n- 2 units of binding ingredient\n- 1 cup of sauce ingredient\n- 1/2 cup of additional ingredient\n- Garnish ingredient, for garnish\n\nInstructions:\n1. Preheat the appliance to a specific temperature.\n2. In a container, mix secondary ingredient, flavor ingredient A, spice A, and spice B.\n3. Add seasoning A and seasoning B to the mixture and stir well.\n4. Dip each main ingredient into the binding ingredient, ensuring it's well-coated.\n5. Coat the main ingredient with the mixture from step 2.\n6. Cook for a set time.\n7. Pour sauce ingredient over the main ingredient.\n8. Sprinkle additional ingredient on top.\n9. Cook for an additional set time until golden brown.\n10. Garnish with garnish ingredient.\n11. Serve and enjoy!"}
-                                </h4>
+                                </div>
                             )
                         }
                         {loading && (
-                            <div className="flex justify-center items-center lg:w-[80%] lg:min-h-[80vh] rounded-lg border border-gray-300 p-10">
+                            <div className="flex justify-center items-center md:w-[80%] md:min-h-[80vh] rounded-lg border border-gray-300 p-10">
                                 <TailSpin
                                     color="#c2c2c2"
                                     height={100}
@@ -259,7 +246,7 @@ export default function GeneratorPage() {
                             </div>
                         )}
                         {recipe && (
-                            <div className="rounded-lg border border-gray-300 lg:w-[80%] lg:overflow-auto lg:max-h-[80vh]">
+                            <div className="rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[80vh]">
                                 <div ref={printRef} className="whitespace-pre-wrap p-10">
                                     <h2 className="text-xl xl:text-2xl font-bold">{recipe.split('\n')[0].split(': ')[1]}</h2>
                                     <p>{recipe.split('\n').splice(1,recipe.length-1).join('\n')}</p>
