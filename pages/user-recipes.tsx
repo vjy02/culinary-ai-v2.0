@@ -22,7 +22,7 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
-      <div>
+      <div className="flex flex-col items-center justify-center border border-gray-300 overflow-auto">
         {savedRecipes !== null ? (savedRecipes.map((item: { content: string, title: string}) => {
           return (
             <details>
