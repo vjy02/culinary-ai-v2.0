@@ -1,9 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse,) {
   if (req.method !== "POST") {
     return res.status(405).end();
   }
@@ -13,17 +10,16 @@ export default async function handler(
   const APIBody = {
     model: "gpt-3.5-turbo-0613",
     messages: [
-      {
+    {
         role: "user",
         content:
-          "Suggest 1 detailed recipe with specific quantities of each ingredients, using these ingredients:" +
-          ingredients.join(", ") +
-          `. Make sure the recipe is ${diet}, but don't name the recipe like ${diet} followed by recipe name.` +
-          `. If I gave you no ingredients, think of some random ingredients to include.
-              Return with the following format: recipe: recipe name, then an empty line then Ingredients header 
-              followed by ingredient list then another empty line then numbered Instructions. Use Australian measurements.`,
-      },
-    ],
+            "Suggest 1 detailed recipe with specific quantities of each ingredients, using these ingredients:" +
+            ingredients.join(", ") +
+            `. Make sure the recipe is ${diet}, but don't name the recipe like ${diet} followed by recipe name.` +
+            `. If I gave you no ingredients, think of some random ingredients to include.
+                Return with the following format: recipe: recipe name, then an empty line then Ingredients header 
+                followed by ingredient list then another empty line then numbered Instructions. Use Australian measurements.`,
+    },],
     temperature: 0.5,
     max_tokens: 1000,
     top_p: 0.9,
