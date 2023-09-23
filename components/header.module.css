@@ -1,6 +1,6 @@
 /* Set min-height to avoid page reflow while session loading */
 
-.loginHeader{
+.loginHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
