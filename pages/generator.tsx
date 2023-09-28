@@ -90,10 +90,10 @@ export default function GeneratorPage () {
 
   return (
     <Layout>
-        <div className="md:flex-row flex flex-col justify-between text-m sm:text-md sm:border sm:border-grey-300 md:border-none md:text-lg">
+        <div className="md:flex-row flex flex-col justify-between text-m sm:text-md  md:text-lg">
             <div
                 id="generator-wrapper"
-                className="flex flex-col justify-between items-center md:justify-around bg-white pb-5 h-[110vh] md:pb-0 md:w-[50%] md:h-[80vh] border-2 border-black-500 rounded-lg"
+                className="flex flex-col justify-between items-center md:justify-around bg-white pb-5 h-[110vh] md:pb-0 md:w-[50%] md:h-[75vh] border-2 border-black-500 rounded-lg"
             >
                 <div
                     id="input-wrapper"
@@ -155,9 +155,9 @@ export default function GeneratorPage () {
                             </div>
                         </div>
                     </div>
-                    <div className="self-center grid grid-rows-2 grid-cols-2 gap-4 h-[30%] md:flex md:flex-col md:justify-center justify-center">
+                    <div className="self-end grid grid-rows-2 grid-cols-2 gap-4 h-[80%] md:flex md:flex-col justify-center">
                             <button
-                                className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegan' ? 'bg-blue-500 text-white' : ''}`}
+                                className={`md:h-[22.5%] py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegan' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
                                   selectedDiet === 'vegan' ? setDiet('') : setDiet('vegan')
                                 }}
@@ -165,7 +165,7 @@ export default function GeneratorPage () {
                                 🌱 <br></br>Vegan
                             </button>
                             <button
-                                className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegetarian' ? 'bg-blue-500 text-white' : ''}`}
+                                className={`md:h-[22.5%]  py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegetarian' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
                                   selectedDiet === 'vegetarian' ? setDiet('') : setDiet('vegetarian')
                                 }}
@@ -173,7 +173,7 @@ export default function GeneratorPage () {
                                 🥦 <br></br> Vegetarian
                             </button>
                             <button
-                                className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'pescetarian' ? 'bg-blue-500 text-white' : ''}`}
+                                className={`md:h-[22.5%]  py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'pescetarian' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
                                   selectedDiet === 'pescetarian' ? setDiet('') : setDiet('pescetarian')
                                 }}
@@ -181,7 +181,7 @@ export default function GeneratorPage () {
                                 🐟 <br></br> Pescetarian
                             </button>
                             <button
-                                className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'keto' ? 'bg-blue-500 text-white' : ''}`}
+                                className={`md:h-[22.5%]  py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'keto' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
                                   selectedDiet === 'keto' ? setDiet('') : setDiet('keto')
                                 }}
@@ -225,14 +225,14 @@ export default function GeneratorPage () {
                 >
                     {
                         !loading && !recipe && (
-                            <div className="whitespace-pre-wrap md:w-[80%] md:max-h-[80vh] rounded-lg border border-gray-300 p-10 md:overflow-auto" >
+                            <div className="whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto" >
                                 <h2 className="text-xl xl:text-2xl font-bold">Example Recipe</h2>
                                 {"\nIngredients:\n- 2 units of main ingredient\n- 1 cup of secondary ingredient\n- 1/2 cup of flavor ingredient A\n- 1/2 teaspoon of spice A\n- 1/2 teaspoon of spice B\n- 1/4 teaspoon of seasoning A\n- 1/4 teaspoon of seasoning B\n- 2 units of binding ingredient\n- 1 cup of sauce ingredient\n- 1/2 cup of additional ingredient\n- Garnish ingredient, for garnish\n\nInstructions:\n1. Preheat the appliance to a specific temperature.\n2. In a container, mix secondary ingredient, flavor ingredient A, spice A, and spice B.\n3. Add seasoning A and seasoning B to the mixture and stir well.\n4. Dip each main ingredient into the binding ingredient, ensuring it's well-coated.\n5. Coat the main ingredient with the mixture from step 2.\n6. Cook for a set time.\n7. Pour sauce ingredient over the main ingredient.\n8. Sprinkle additional ingredient on top.\n9. Cook for an additional set time until golden brown.\n10. Garnish with garnish ingredient.\n11. Serve and enjoy!"}
                             </div>
                         )
                     }
                     {loading && (
-                        <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[80vh] rounded-lg border border-gray-300">
+                        <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh] rounded-lg border border-gray-300">
                             <TailSpin
                                 color="#c2c2c2"
                                 height={100}
@@ -241,7 +241,7 @@ export default function GeneratorPage () {
                         </div>
                     )}
                     {recipe && (
-                        <div className="rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[80vh]">
+                        <div className="rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh]">
                             <div ref={printRef} className="whitespace-pre-wrap p-10">
                                 <h2 className="text-xl xl:text-2xl font-bold">{recipe.split('\n')[0].split(': ')[1]}</h2>
                                 <p>{recipe.split('\n').splice(1, recipe.length - 1).join('\n')}</p>

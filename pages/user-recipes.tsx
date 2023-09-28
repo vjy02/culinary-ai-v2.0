@@ -99,7 +99,7 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
-      <div className="flex flex-col md:flex-row items-between justify-between h-[160vh] md:h-[80vh]">
+      <div className="flex flex-col md:flex-row items-between justify-between h-[160vh] md:h-[75vh]">
         <div className="flex overflow-auto gap-3 flex-col items-center w-[100%] h-[25%] md:h-[100%] md:w-[40%] pt-4 md:pt-6 rounded-lg border border-gray-300">
           {savedRecipes.length > 0 ? (
             savedRecipes.map((item: Recipe, i: number) => {
@@ -121,7 +121,7 @@ export default function ServerSidePage({ data }: { data: any }) {
         </div>
         <div className="max-h-[70%] md:w-[40%] ">
             {savedRecipes.length > 0 ? (
-            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto md:max-h-[80vh]">
+            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto md:max-h-[75vh]">
               <div className="whitespace-pre-wrap p-10">
                 <h2 className="text-xl xl:text-2xl font-bold">{curRecipe.title}</h2>
                 <p>{curRecipe.content.split('\n').splice(1, curRecipe.content.length - 1).join('\n')}</p>
@@ -129,7 +129,7 @@ export default function ServerSidePage({ data }: { data: any }) {
             </div>
             ):
             (
-            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto h-[80vh] flex items-center justify-center">
+            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto h-[75vh] flex items-center justify-center">
                 <h1 className="text-xl xl:text-3xl font-bold">No Saved Recipes!</h1>
             </div>
             )}

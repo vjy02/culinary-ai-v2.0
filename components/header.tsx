@@ -2,9 +2,9 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import styles from "./header.module.css";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
-import logoIcon from "../public/images/logo.svg";
+import logoIcon from "../public/images/logo.png";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
@@ -16,8 +16,7 @@ export default function Header() {
   useEffect(() => {
     if (session && router.pathname === "/") {
       router.push("/generator");
-    } else if (!session && router.pathname !== "/") {
-      console.log("hi")
+    } else if (!session && router.pathname !== "/" && router.pathname !== "/login") {
       router.push("/");
     }
   }, [session]);
@@ -31,7 +30,7 @@ export default function Header() {
         {session && session.user && session.user.image ? (
           <Image src={session.user.image} height={50} width={50} alt="logo" />
         ) : (
-          <Image src={logoIcon} height={50} width={50} alt="logo" />
+          <Image src={logoIcon} height={145} width={145} alt="logo" />
         )}
 
         <p
@@ -43,10 +42,10 @@ export default function Header() {
             <>
               <a
                 href={`/api/auth/signin`}
-                className={styles.buttonPrimary}
+                className="self-start pt-2.5 pb-2.5 pr-4 pl-4 rounded-lg bg-green-500 text-white font-bold"
                 onClick={(e) => {
                   e.preventDefault();
-                  signIn();
+                  signIn('google');
                 }}
               >
                 Sign in
@@ -57,7 +56,7 @@ export default function Header() {
             <>
               <a
                 href={`/api/auth/signout`}
-                className={styles.button}
+                className="self-start pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold"
                 onClick={(e) => {
                   e.preventDefault();
                   signOut();
