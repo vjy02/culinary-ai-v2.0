@@ -155,7 +155,7 @@ export default function GeneratorPage () {
                             </div>
                         </div>
                     </div>
-                    <div className="self-center grid grid-rows-2 grid-cols-2 gap-5 h-[30%] md:flex md:flex-col justify-center md:h-[100%]">
+                    <div className="self-center grid grid-rows-2 grid-cols-2 gap-4 h-[30%] md:flex md:flex-col md:justify-center justify-center">
                             <button
                                 className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegan' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
