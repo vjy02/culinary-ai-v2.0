@@ -106,7 +106,7 @@ export default function GeneratorPage () {
                             placeholder="Enter a food item"
                             value={input}
                             onChange={(e) => { handleInput(e) }}
-                            className="py-2 px-3 rounded-lg border border-gray-300 mb-4 focus:outline-none focus:ring focus:ring-blue-500 md:w-[70%]"
+                            className="py-2 px-3 rounded-lg border border-gray-300 mb-4 focus:outline-none focus:ring focus:ring-blue-500 md:w-[80%]"
                         />
                         <div className="overflow-auto min-h-[100%] w-[100%] md:w-[90%] bg-white rounded-lg border border-gray-300 p-2 space-y-2">
                             {suggestions.length > 0 && (
@@ -155,7 +155,7 @@ export default function GeneratorPage () {
                             </div>
                         </div>
                     </div>
-                    <div className="self-center md:self-center grid grid-rows-2 grid-cols-2 gap-5 h-[30%] md:flex md:flex-col justify-center md:h-[100%]">
+                    <div className="self-center grid grid-rows-2 grid-cols-2 gap-5 h-[30%] md:flex md:flex-col justify-center md:h-[100%]">
                             <button
                                 className={`py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegan' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
@@ -221,7 +221,7 @@ export default function GeneratorPage () {
             <div className="flex mt-10  md:w-[50%] md:mt-0">
                 <div
                     id="recipe-wrapper"
-                    className="flex flex-col items-end gap-10 md:self-start md:w-[100%]"
+                    className="flex flex-col items-end gap-10 md:self-start w-[100%]"
                 >
                     {
                         !loading && !recipe && (
@@ -232,7 +232,7 @@ export default function GeneratorPage () {
                         )
                     }
                     {loading && (
-                        <div className="flex justify-center items-center md:w-[80%] md:min-h-[80vh] rounded-lg border border-gray-300 p-10">
+                        <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[80vh] rounded-lg border border-gray-300">
                             <TailSpin
                                 color="#c2c2c2"
                                 height={100}

@@ -17,6 +17,7 @@ export default function Header() {
     if (session && router.pathname === "/") {
       router.push("/generator");
     } else if (!session && router.pathname !== "/") {
+      console.log("hi")
       router.push("/");
     }
   }, [session]);

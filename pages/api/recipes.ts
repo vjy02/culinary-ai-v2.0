@@ -18,7 +18,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           $push: {
             recipes: {
               title: recipeObject.title,
-              content: recipeObject.content
+              content: recipeObject.content,
+              isFavorite: false,
             }
           }
         },
@@ -67,5 +68,40 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         res.json({ status: 200, message: 'Recipe deleted successfully.' })
       }
       break
+    
+    case 'PATCH':
+      try {
+          const { index } = req.body;
+  
+          const currentRecipe = await db.collection('recipes').findOne({ email: userEmail as string });
+  
+          if (!currentRecipe || !currentRecipe.recipes[index]) {
+              res.status(404).json({ message: 'Recipe not found.' });
+              return;
+          }
+  
+          // Toggle the isFavorite field
+          const isFavorite = !currentRecipe.recipes[index].isFavorite;
+          const updateField = `recipes.${index}.isFavorite`;
+  
+          const updateResult = await db.collection('recipes').updateOne(
+              { email: userEmail as string },
+              {
+                  $set: {
+                      [updateField]: isFavorite,
+                  },
+              }
+          );
+  
+          if (updateResult.modifiedCount === 0) {
+              res.status(404).json({ message: 'Recipe not found or not updated.' });
+          } else {
+              res.status(200).json({ message: 'Recipe updated successfully.', isFavorite });
+          }
+      } catch (error) {
+          res.status(500).json({ message: 'An error occurred while updating the recipe.', error });
+      }
+    break;
+    
   }
 }
