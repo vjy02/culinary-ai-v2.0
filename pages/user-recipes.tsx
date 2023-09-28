@@ -99,7 +99,7 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
-      <div className="flex flex-col md:flex-row items-between justify-around h-[160vh] md:h-[80vh]">
+      <div className="flex flex-col md:flex-row items-between justify-between h-[160vh] md:h-[80vh]">
         <div className="flex overflow-auto gap-3 flex-col items-center w-[100%] h-[25%] md:h-[100%] md:w-[40%] pt-4 md:pt-6 rounded-lg border border-gray-300">
           {savedRecipes.length > 0 ? (
             savedRecipes.map((item: Recipe, i: number) => {
