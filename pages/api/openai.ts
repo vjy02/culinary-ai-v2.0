@@ -1,7 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai-edge';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// Create an OpenAI API client
 const config = new Configuration({
   apiKey: process.env.OPENAI_KEY,
 });
@@ -15,7 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { ingredients, diet } = req.body;
 
   try {
-    // Ask OpenAI for a streaming completion given the ingredients and diet
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       stream: true,
@@ -32,14 +30,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ],
     });
 
-    // Convert the response into a friendly text-stream
-    const stream = response.body; // Adjust this line based on how the 'openai-edge' package provides the stream
+    const stream = response.body; 
     if (stream == null){
       res.status(500).json({ error: 'Failed to fetch recipe from OpenAI' });
       return
     }
     
-    // Read the stream and send chunks to the client
     const reader = stream.getReader();
     let result = '';
 
