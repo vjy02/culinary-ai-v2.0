@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end();
   }
   const SSR = withSSRContext({ req });
-  const { ingredients, diet } = SSR.body;
+  const { ingredients, diet } = req.body;
 
   try {
     const response = await openai.createChatCompletion({
