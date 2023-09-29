@@ -36,7 +36,7 @@ export default function ServerSidePage({ data }: { data: any }) {
       if (session && session.user) {
         const userEmail = session.user.email;
         let res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`,
+          `/api/recipes?userEmail=${userEmail}`,
           {
             method: "DELETE",
             headers: {
@@ -71,7 +71,7 @@ export default function ServerSidePage({ data }: { data: any }) {
       if (session && session.user) {
         const userEmail = session.user.email;
         let res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`,
+          `/api/recipes?userEmail=${userEmail}`,
           {
             method: "PATCH",
             headers: {
