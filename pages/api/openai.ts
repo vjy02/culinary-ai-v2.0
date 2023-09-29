@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
   const { ingredients, diet } = req.body;
 
   const APIBody = {
-    model: "gpt-3.5-turbo-0613",
+    model: "gpt-3.5-turbo-16k-0613",
     messages: [
     {
         role: "user",
