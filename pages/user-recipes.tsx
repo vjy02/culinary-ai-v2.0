@@ -9,7 +9,7 @@ import { faStar, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react";
 import Image from 'next/image';
-import { useEffect } from 'react';
+
 
 type Recipe = {
   _id: string;
