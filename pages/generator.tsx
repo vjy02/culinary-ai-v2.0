@@ -115,12 +115,7 @@ export default function GeneratorPage () {
         console.error('Error fetching recipe from server-side API', err);
         setLoading(false);
     }
-}
-
-
-
-
-  
+  }
 
   return (
     <Layout>

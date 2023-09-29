@@ -70,6 +70,11 @@ export default function ServerSidePage({ data }: { data: any }) {
       const session = await getSession();
       if (session && session.user) {
         const userEmail = session.user.email;
+
+        const updatedRecipes = [...savedRecipes];
+        updatedRecipes[index].isFavorite = true;
+        setSavedRecipes(updatedRecipes);
+
         let res = await fetch(
           `/api/recipes?userEmail=${userEmail}`,
           {
@@ -82,7 +87,7 @@ export default function ServerSidePage({ data }: { data: any }) {
         );
         const data = await res.json();
         if (res.ok) {
-          // Now update current recipes saved on user interface
+          // Now update to DB state, this will revert if failed
           const updatedRecipes = [...savedRecipes];
           updatedRecipes[index].isFavorite = data.isFavorite;
           setSavedRecipes(updatedRecipes);
