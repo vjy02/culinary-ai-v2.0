@@ -24,7 +24,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "aws-amplify": "^5.3.11",
     "eventsource-parser": "^1.1.1",
     "mongodb": "^6.0.0",
     "next": "latest",
