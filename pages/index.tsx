@@ -3,7 +3,6 @@ import foodImg from "../public/images/FooterBowl_Small.webp";
 import Image from "next/image";
 import foodTag from "../public/images/foodTag.png";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 
 export default function IndexPage() {
   const router = useRouter();

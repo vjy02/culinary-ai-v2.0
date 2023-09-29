@@ -27,12 +27,13 @@ export default function Header() {
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
       </noscript>
       <div className={styles.loginHeader}>
-        {session && session.user && session.user.image ? (
-          <Image src={session.user.image} height={50} width={50} alt="logo" />
-        ) : (
-          <Image src={logoIcon} height={145} width={145} alt="logo" />
-        )}
-
+        <div>
+          {session && session.user && session.user.image ? (
+            <Image src={session.user.image} height={50} width={50} alt="logo" />
+          ) : (
+            <Image src={logoIcon} height={145} width={145} alt="logo" />
+          )}
+        </div>
         <p
           className={`nojs-show ${
             !session && loading ? styles.loading : styles.loaded
@@ -42,7 +43,7 @@ export default function Header() {
             <>
               <a
                 href={`/api/auth/signin`}
-                className="self-start pt-2.5 pb-2.5 pr-4 pl-4 rounded-lg bg-green-500 text-white font-bold"
+                className="self-start pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold"
                 onClick={(e) => {
                   e.preventDefault();
                   signIn('google');

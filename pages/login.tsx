@@ -26,7 +26,7 @@ export default function IndexPage() {
        padding: 0
      }}>
   <div className="absolute inset-0 bg-black opacity-60"></div>
-      <div className="bg-gray-100 p-8 rounded-lg shadow-lg text-center flex flex-col items-center md:max-w-[30vw] z-40">
+      <div className="bg-gray-100 p-8 rounded-lg shadow-lg text-center flex flex-col items-center md:max-w-[25vw] md:min-h-[70vh] z-40">
         <h1 className="text-2xl md:text-4xl font-bold mb-4">Login to CulinaryAI</h1>
         <p className="text-gray-700 mb-8 font-bold">
           NOTE: Demo version does not have saving recipe functionality or page! Please connect with Google for the full experience!

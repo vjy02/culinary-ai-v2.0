@@ -100,19 +100,68 @@ export default function ServerSidePage({ data }: { data: any }) {
   return (
     <Layout>
       <div className="flex flex-col md:flex-row items-between justify-between h-[160vh] md:h-[75vh]">
-        <div className="flex overflow-auto gap-3 flex-col items-center w-[100%] h-[25%] md:h-[100%] md:w-[40%] pt-4 md:pt-6 rounded-lg border border-gray-300">
+        <div className="flex gap-3 flex-col items-center w-[100%] h-[25%] md:h-[100%] md:w-[50%] pt-4 md:pt-6 rounded-lg border border-gray-300">
           {savedRecipes.length > 0 ? (
-            savedRecipes.map((item: Recipe, i: number) => {
-              return (
-                  <div className="flex justify-between w-[90%] max-w-[90%] border p-2 border-grey-300 md:w-[90%] md:max-w-[90%]">
-                    <button onClick={() => { setRecipe(item); } }>{item.title}</button>
-                    <div className="flex justify-between min-w-[15%] w-[15%] md:w-[10%] md:min-w-[10%]">
-                      <button onClick={() => toggleFavoriteRecipeFromDb(i)}>{item.isFavorite ? (<FontAwesomeIcon icon={faStar} />):(<Image src={hollowStar} alt="not favorited" />)}</button>
-                      <button onClick={() => deleteRecipeFromDb(i)}><FontAwesomeIcon icon={faTrashCan} /></button>
+            <div className="flex justify-between items-between gap-10 w-[90%] h-[95%]">
+              <div className="flex flex-col gap-5 w-[90%]">
+                <h1 className="text-xl xl:text-2xl font-bold">Favorites</h1>
+                <div className="border border-gray-300 flex flex-col items-center max-h-[63vh] min-h-[63vh] overflow-auto">
+                  {savedRecipes.map((item: Recipe, i: number) => {
+                    if (item.isFavorite){
+                      return (
+                        <div className="flex justify-between border p-2 border-grey-300 w-[100%]">
+                          <div className="flex-1 truncate"> 
+                            <button 
+                              className="" 
+                              onClick={() => { setRecipe(item); } }
+                              style={{ maxWidth: 'calc(100% - 40px)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} // Added styles for ellipsis
+                            >
+                              {item.title}
+                            </button>
+                          </div>
+                          <div className="flex justify-between min-w-[15%] w-[15%] md:w-[12%] md:min-w-[12%]">
+                            <button onClick={() => toggleFavoriteRecipeFromDb(i)}>
+                              {item.isFavorite ? (<FontAwesomeIcon icon={faStar} />) : (<Image src={hollowStar} alt="not favorited" />)}
+                            </button>
+                            <button onClick={() => deleteRecipeFromDb(i)}>
+                              <FontAwesomeIcon icon={faTrashCan} />
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    }})
+                  }
+                </div>
+              </div>
+              <div className="flex flex-col gap-5 w-[90%]">
+                <h1 className="text-xl xl:text-2xl font-bold">All Recipes</h1>
+                <div className="border border-gray-300 flex flex-col items-center max-h-[63vh] min-h-[63vh] overflow-auto">
+                  {savedRecipes.map((item: Recipe, i: number) => {
+                  return (
+                    <div className="flex justify-between border p-2 border-grey-300 w-[100%]">
+                      <div className="flex-1 truncate"> 
+                        <button 
+                          className="" 
+                          onClick={() => { setRecipe(item); } }
+                          style={{ maxWidth: 'calc(100% - 40px)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} // Added styles for ellipsis
+                        >
+                          {item.title}
+                        </button>
+                      </div>
+                      <div className="flex justify-between min-w-[15%] w-[15%] md:w-[12%] md:min-w-[12%]">
+                        <button onClick={() => toggleFavoriteRecipeFromDb(i)}>
+                          {item.isFavorite ? (<FontAwesomeIcon icon={faStar} />) : (<Image src={hollowStar} alt="not favorited" />)}
+                        </button>
+                        <button onClick={() => deleteRecipeFromDb(i)}>
+                          <FontAwesomeIcon icon={faTrashCan} />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              })
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
             ) : (
               <h2>
                 No recipes saved! Generate a recipe and click save for it to appear
