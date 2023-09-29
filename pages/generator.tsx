@@ -3,6 +3,7 @@ import Layout from '../components/layout'
 import { getSession } from 'next-auth/react'
 import { TailSpin } from 'react-loader-spinner'
 import ReactToPrint from 'react-to-print'
+import { useRouter } from 'next/router'
 
 export default function GeneratorPage () {
   const [input, setInput] = useState<string>('')
@@ -16,6 +17,11 @@ export default function GeneratorPage () {
   useEffect(() => {
     getSuggestedIngredients()
   }, [input])
+
+  const router = useRouter();
+  useEffect(() => {
+    router.prefetch('/user-recipes');
+  }, []);
 
   function handleInput (event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value
