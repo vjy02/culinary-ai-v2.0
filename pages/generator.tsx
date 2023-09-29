@@ -3,7 +3,6 @@ import Layout from '../components/layout'
 import { getSession } from 'next-auth/react'
 import { TailSpin } from 'react-loader-spinner'
 import ReactToPrint from 'react-to-print'
-import { useRouter } from 'next/router'
 
 export default function GeneratorPage () {
   const [input, setInput] = useState<string>('')
@@ -17,11 +16,6 @@ export default function GeneratorPage () {
   useEffect(() => {
     getSuggestedIngredients()
   }, [input])
-
-  const router = useRouter();
-  useEffect(() => {
-    router.prefetch('/user-recipes');
-  }, []);
 
   function handleInput (event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value
@@ -70,29 +64,63 @@ export default function GeneratorPage () {
     }
   }
 
-  async function fetchOpenApi () {
+  async function fetchOpenApi() {
     try {
-      setRecipe('')
-      setLoading(true)
-      const res = await fetch(`/api/openai`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ ingredients, diet: selectedDiet })
-      })
+        setRecipe('');
+        setLoading(true);
+        const res = await fetch(`/api/openai`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ingredients, diet: selectedDiet })
+        });
 
-      if (!res.ok) {
-        throw new Error('Failed to fetch from server-side API')
-      }
+        if (!res.ok || !res.body) {
+            throw new Error('Failed to fetch from server-side API');
+        }
 
-      const recipe = await res.json()
-      setRecipe(recipe)
+        let result = '';
+        const reader = res.body.getReader();
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
+                break;
+            }
+            const chunk = new TextDecoder().decode(value);
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    const dataStr = line.slice(6); // Remove the "data: " prefix
+                    if (dataStr === '[DONE]') {
+                        // Stop reading when "[DONE]" is encountered
+                        setRecipe(result.trim());
+                        setLoading(false);
+                        return;
+                    }
+
+                    try {
+                        const data = JSON.parse(dataStr);
+                        if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
+                            result += data.choices[0].delta.content;
+                        }
+                    } catch (err) {
+                        console.error('Error parsing JSON chunk', err);
+                    }
+                }
+            }
+        }
     } catch (err) {
-      console.error('Error fetching recipe from server-side API', err)
+        console.error('Error fetching recipe from server-side API', err);
+        setLoading(false);
     }
-    setLoading(false)
-  }
+}
+
+
+
+
+  
 
   return (
     <Layout>
@@ -161,7 +189,7 @@ export default function GeneratorPage () {
                             </div>
                         </div>
                     </div>
-                    <div className="self-end grid grid-rows-2 grid-cols-2 gap-4 h-[80%] md:flex md:flex-col justify-center">
+                    <div className="self-end grid grid-rows-2 grid-cols-2 gap-4 md:h-[80%] md:flex md:flex-col justify-center md:w-fit w-[100%]">
                             <button
                                 className={`md:h-[22.5%] py-2 px-4 h-fit rounded-lg border border-gray-300 ${selectedDiet === 'vegan' ? 'bg-blue-500 text-white' : ''}`}
                                 onClick={() => {
