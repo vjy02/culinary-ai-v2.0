@@ -68,12 +68,11 @@ export default function ServerSidePage({ data }: { data: any }) {
 
     try {
       const session = await getSession();
+      const updatedRecipes = [...savedRecipes];
+      updatedRecipes[index].isFavorite = updatedRecipes[index].isFavorite ? false : true;
+      setSavedRecipes(updatedRecipes);
       if (session && session.user) {
         const userEmail = session.user.email;
-
-        const updatedRecipes = [...savedRecipes];
-        updatedRecipes[index].isFavorite = true;
-        setSavedRecipes(updatedRecipes);
 
         let res = await fetch(
           `/api/recipes?userEmail=${userEmail}`,
