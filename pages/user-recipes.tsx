@@ -23,11 +23,6 @@ export default function ServerSidePage({ data }: { data: any }) {
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
   const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
 
-  useEffect(() => {
-      console.log('Component re-rendered:', savedRecipes); // Log the entire savedRecipes state upon each re-render
-  }, [savedRecipes]);
-
-
   async function deleteRecipeFromDb(index: number) {
     const testData = { index: index };
 
