@@ -1,17 +1,20 @@
 import { Configuration, OpenAIApi } from 'openai-edge';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { Amplify, withSSRContext } from "aws-amplify";
+import awsExports from "../../src/aws-exports";
 
 const config = new Configuration({
   apiKey: process.env.OPENAI_KEY,
 });
 const openai = new OpenAIApi(config);
+Amplify.configure({ ...awsExports });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).end();
   }
-
-  const { ingredients, diet } = req.body;
+  const SSR = withSSRContext({ req });
+  const { ingredients, diet } = SSR.body;
 
   try {
     const response = await openai.createChatCompletion({
