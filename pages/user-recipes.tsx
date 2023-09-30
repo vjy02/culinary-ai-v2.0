@@ -188,30 +188,47 @@ export default function ServerSidePage({ data }: { data: any }) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions);
+  try {
+    const session = await getServerSession(context.req, context.res, authOptions);
 
-  if (session && session.user) {
-    const userEmail = session.user.email;
-    let res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+    if (session && session.user) {
+      const userEmail = session.user.email;
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch recipes');
+      }
+
+      const data = await response.json();
+
+      return {
+        props: {
+          data,
+          userEmail,
         },
-      },
-    );
-    let data = await res.json();
+      };
+    }
+
     return {
       props: {
-        data,
-        userEmail,
+        data: null,
+      },
+    };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+    return {
+      props: {
+        data: null,
+        error: error,
       },
     };
   }
-  return {
-    props: {
-      data: null,
-    },
-  };
 }
