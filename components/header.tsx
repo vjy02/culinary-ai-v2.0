@@ -92,7 +92,6 @@ export default function Header() {
                     ? "underline underline-offset-4 decoration-2"
                     : ""
                 }
-              prefetch
               >
                 My Recipes
               </Link>
