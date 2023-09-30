@@ -23,6 +23,9 @@ export default function Header() {
       }
   }, [session, status]);  // Add status as a dependency
 
+  function redirectLogin(){
+    router.push("/login")
+  }
 
   return (
     <header>
@@ -45,12 +48,8 @@ export default function Header() {
           {!session && (
             <>
               <a
-                href={`/api/auth/signin`}
-                className="self-start pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold"
-                onClick={(e) => {
-                  e.preventDefault();
-                  signIn('google');
-                }}
+                className="self-start pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold cursor-pointer"
+                onClick={redirectLogin}
               >
                 Sign in
               </a>

@@ -46,6 +46,10 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   async function deleteRecipeFromDb(index: number) {
     const testData = { index: index };
+    const tempUpdatedRecipes = [...savedRecipes]
+    const updatedRecipes = [...savedRecipes];
+    updatedRecipes.splice(index, 1);
+    setSavedRecipes(updatedRecipes);
 
     try {
       const session = await getSession();
@@ -65,7 +69,7 @@ export default function ServerSidePage({ data }: { data: any }) {
         
         if (res.ok){
           // Now update current recipes saved on user interface
-          const updatedRecipes = [...savedRecipes];
+          const updatedRecipes = tempUpdatedRecipes
           updatedRecipes.splice(index, 1);
           setSavedRecipes(updatedRecipes);
         }
