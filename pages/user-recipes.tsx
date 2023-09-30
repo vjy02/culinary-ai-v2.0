@@ -19,7 +19,8 @@ type Recipe = {
 };
 
 export default function ServerSidePage({ data }: { data: any }) {
-  const initialRecipes = data && data.data.length !== 0 ? data.data[0].recipes : [];
+  const initialRecipes = data.data[0].recipes
+  //data && data.data.length !== 0 ? data.data[0].recipes : [];
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
   const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
 
@@ -208,7 +209,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       }
 
       const data = await response.json();
-
+      
       return {
         props: {
           data,
