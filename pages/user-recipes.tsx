@@ -192,7 +192,7 @@ export default function ServerSidePage({ data }: { data: any }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     const session = await getServerSession(context.req, context.res, authOptions);
-
+    console.log(session)
     if (session && session.user) {
       const userEmail = session.user.email;
       const response = await fetch(
@@ -208,9 +208,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       if (!response.ok) {
         throw new Error('Failed to fetch recipes');
       }
-
       const data = await response.json();
-      
+      console.log(data)
       return {
         props: {
           data,
