@@ -14,12 +14,15 @@ export default function Header() {
   const currentRoute = usePathname();
 
   useEffect(() => {
+    if (status === 'loading') return;  // Add this line to wait until the session is loaded
+
     if (session && router.pathname === "/") {
       router.push("/generator");
     } else if (!session && router.pathname !== "/" && router.pathname !== "/login") {
       router.push("/");
-    }
-  }, [session]);
+      }
+  }, [session, status]);  // Add status as a dependency
+
 
   return (
     <header>

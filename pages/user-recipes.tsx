@@ -22,19 +22,19 @@ export default function ServerSidePage({ data }: { data: any }) {
   const initialRecipes = data ? data.data[0].recipes : [];
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
   const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
-  const [recipes, setRecipes] = useState([]);
   const { data: session } = useSession();
 
   useEffect(() => {
     if (session && session.user && session.user.email) {
       const fetchRecipes = async () => {
         try {
-          const response = await fetch(`/api/recipes?userEmail=${session.user.email}`);
+          const response = await fetch(`/api/recipes?userEmail=${session.user?.email}`);
           if (!response.ok) {
             throw new Error('Failed to fetch recipes');
           }
           const data = await response.json();
-          setRecipes(data.data[0]?.recipes || []);
+          setRecipe(data.data[0].recipes[0])
+          setSavedRecipes(data.data[0]?.recipes || []);
         } catch (error) {
           console.error('Error fetching recipes:', error);
         }
@@ -208,47 +208,3 @@ export default function ServerSidePage({ data }: { data: any }) {
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  try {
-    const session = await getServerSession(context.req, context.res, authOptions);
-    console.log(session)
-    if (session && session.user) {
-      const userEmail = session.user.email;
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/recipes?userEmail=${userEmail}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch recipes');
-      }
-      const data = await response.json();
-      console.log(data)
-      return {
-        props: {
-          data,
-          userEmail,
-        },
-      };
-    }
-
-    return {
-      props: {
-        data: null,
-      },
-    };
-  } catch (error) {
-    console.error('Error in getServerSideProps:', error);
-    return {
-      props: {
-        data: null,
-        error: error,
-      },
-    };
-  }
-}
