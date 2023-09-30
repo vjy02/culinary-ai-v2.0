@@ -4,10 +4,10 @@ import Layout from "../components/layout";
 import hollowStar from "../public/images/hollowStar.svg";
 
 import type { GetServerSidePropsContext } from "next";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { faStar, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from 'next/image';
 
 
@@ -20,10 +20,29 @@ type Recipe = {
 
 export default function ServerSidePage({ data }: { data: any }) {
   const initialRecipes = data ? data.data[0].recipes : [];
-  console.log(initialRecipes )
-
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
   const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
+  const [recipes, setRecipes] = useState([]);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session && session.user && session.user.email) {
+      const fetchRecipes = async () => {
+        try {
+          const response = await fetch(`/api/recipes?userEmail=${session.user.email}`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch recipes');
+          }
+          const data = await response.json();
+          setRecipes(data.data[0]?.recipes || []);
+        } catch (error) {
+          console.error('Error fetching recipes:', error);
+        }
+      };
+
+      fetchRecipes();
+    }
+  }, [session]);
 
   async function deleteRecipeFromDb(index: number) {
     const testData = { index: index };
