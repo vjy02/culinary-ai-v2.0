@@ -18,7 +18,7 @@ export default function Header() {
 
     if (session && router.pathname === "/") {
       router.push("/generator");
-    } else if (!session && router.pathname !== "/" && router.pathname !== "/login") {
+    } else if (!session && router.pathname !== "/login") {
       router.push("/");
       }
   }, [session, status]);  // Add status as a dependency
