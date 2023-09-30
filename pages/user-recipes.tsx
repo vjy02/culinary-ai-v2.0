@@ -19,8 +19,8 @@ type Recipe = {
 };
 
 export default function ServerSidePage({ data }: { data: any }) {
-  console.log(data)
-  const initialRecipes = data && data.data.length !== 0 ? data.data[0].recipes : [];
+  const initialRecipes = data ? data.data[0].recipes : [];
+  console.log(initialRecipes )
 
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
   const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
