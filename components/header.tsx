@@ -16,7 +16,7 @@ export default function Header() {
   useEffect(() => {
     if (session && router.pathname === "/") {
       router.push("/generator");
-    } else if (!session && router.pathname !== "/" && router.pathname !== "/login") {
+    } else if (!session && router.pathname !== "/" && router.pathname !== "/login" && router.pathname !== "/user-recipes") {
       router.push("/");
     }
   }, [session]);
