@@ -1,15 +1,13 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]";
 import Layout from "../components/layout";
 import hollowStar from "../public/images/hollowStar.svg";
 
-import type { GetServerSidePropsContext } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { faStar, faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
-
+import ReactToPrint from "react-to-print";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 type Recipe = {
   _id: string;
@@ -23,7 +21,8 @@ export default function ServerSidePage({ data }: { data: any }) {
   const [savedRecipes, setSavedRecipes] = useState<Recipe[]>(initialRecipes);
   const [curRecipe, setRecipe] = useState<Recipe>(initialRecipes[0])
   const { data: session } = useSession();
-
+  const printRef = useRef(null)
+  
   useEffect(() => {
     if (session && session.user && session.user.email) {
       const fetchRecipes = async () => {
@@ -123,13 +122,13 @@ export default function ServerSidePage({ data }: { data: any }) {
 
   return (
     <Layout>
-      <div className="flex flex-col md:flex-row items-between justify-between h-[160vh] md:h-[75vh]">
-        <div className="flex gap-3 flex-col items-center w-[100%] h-[25%] md:h-[100%] md:w-[50%] pt-4 md:pt-6 rounded-lg border border-gray-300">
+      <div className="flex flex-col md:flex-row items-between justify-between md:h-[75vh]">
+        <div className="flex gap-3 flex-col items-center w-[100%] h-[72vh] md:h-[100%] md:w-[50%] pt-4 md:pt-6 rounded-lg border border-gray-300">
           {savedRecipes.length > 0 ? (
-            <div className="flex justify-between items-between gap-10 w-[90%] h-[95%]">
+            <div className="flex flex-col md:flex-row justify-between items-between gap-10 w-[90%] md:h-[95%]">
               <div className="flex flex-col gap-5 w-[90%]">
                 <h1 className="text-xl xl:text-2xl font-bold">Favorites</h1>
-                <div className="border border-gray-300 flex flex-col items-center max-h-[63vh] min-h-[63vh] overflow-auto">
+                <div className="border border-gray-300 flex flex-col items-center max-h-[25vh] min-h-[25vh] md:max-h-[63vh] md:min-h-[63vh] overflow-auto">
                   {savedRecipes.map((item: Recipe, i: number) => {
                     if (item.isFavorite){
                       return (
@@ -159,7 +158,7 @@ export default function ServerSidePage({ data }: { data: any }) {
               </div>
               <div className="flex flex-col gap-5 w-[90%]">
                 <h1 className="text-xl xl:text-2xl font-bold">All Recipes</h1>
-                <div className="border border-gray-300 flex flex-col items-center max-h-[63vh] min-h-[63vh] overflow-auto">
+                <div className="border border-gray-300 flex flex-col items-center max-h-[25vh] min-h-[25vh] md:max-h-[63vh] md:min-h-[63vh] overflow-auto">
                   {savedRecipes.map((item: Recipe, i: number) => {
                   return (
                     <div className="flex justify-between border p-2 border-grey-300 w-[100%]">
@@ -195,9 +194,20 @@ export default function ServerSidePage({ data }: { data: any }) {
         <div className="max-h-[70%] md:w-[40%] ">
             {savedRecipes.length > 0 ? (
             <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto md:max-h-[75vh]">
-              <div className="whitespace-pre-wrap p-10">
-                <h2 className="text-xl xl:text-2xl font-bold">{curRecipe.title}</h2>
-                <p>{curRecipe.content.split('\n').splice(1, curRecipe.content.length - 1).join('\n')}</p>
+              <div className="relative whitespace-pre-wrap">
+                <div className="absolute right-5 top-5 flex gap-2">
+                    <ReactToPrint
+                        trigger={() => <button className="py-3 px-4 text-2xl border">🖨️</button>}
+                        content={() => printRef.current}
+                    />
+                    <CopyToClipboard text={curRecipe.content}>
+                      <button className="py-3 px-4 text-2xl border">📋</button>
+                    </CopyToClipboard>
+                </div>
+                <div className="whitespace-pre-wrap p-10" ref={printRef} >
+                  <h2 className="text-xl xl:text-2xl font-bold">{curRecipe.title}</h2>
+                  <p>{curRecipe.content.split('\n').splice(1, curRecipe.content.length - 1).join('\n')}</p>
+                </div>
               </div>
             </div>
             ):

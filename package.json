@@ -31,6 +31,7 @@
     "nodemailer": "^6",
     "openai-edge": "^1.2.2",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-loader-spinner": "^5.4.5",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@types/node": "^17",
     "@types/react": "^18.0.37",
+    "@types/react-copy-to-clipboard": "^5.0.5",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "autoprefixer": "^10.4.15",
     "eslint-config-standard-with-typescript": "^39.1.0",

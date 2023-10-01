@@ -58,8 +58,10 @@ export default function GeneratorPage () {
           body: JSON.stringify(testData)
         })
         await res.json()
+        alert("Successfully saved recipe!")
       }
     } catch (err) {
+      alert("Error connecting to server! Please try relogging!")
       console.error('Error posting recipe to MongoDB', err)
     }
   }
@@ -190,7 +192,7 @@ export default function GeneratorPage () {
                             </button>
                     </div>
                 </div>
-                <div className="grid grid-rows-2 grid-cols-2 gap-5 md:grid-cols-4 md:grid-rows-1 md:gap-5 md:w-[90%] md:h-[15%] rounded-lg">
+                <div className="grid grid-rows-2 grid-cols-2 gap-5 md:grid-cols-4 md:grid-rows-1 md:gap-5 w-[90%] md:h-[15%] rounded-lg">
                     <button
                         className="py-2 px-4 rounded-lg border border-gray-300 text-l"
                         onClick={() => {
@@ -200,10 +202,10 @@ export default function GeneratorPage () {
                     >
                         🎲 <br></br> Random
                     </button>
-                    <ReactToPrint
-                        trigger={() => <button className="py-2 px-4 rounded-lg border border-gray-300 text-l">🖨️ <br></br> Print</button>}
-                        content={() => printRef.current}
-                    />
+                      <ReactToPrint
+                          trigger={() => <button className="py-2 px-4 rounded-lg border border-gray-300 text-l">🖨️ <br></br> Print</button>}
+                          content={() => printRef.current}
+                      />
                     <button
                         onClick={submitRecipeToDb}
                         className="py-2 px-4 rounded-lg border border-gray-300 text-l"
