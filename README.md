@@ -2,7 +2,7 @@
 CulinaryAI is a Chat-GPT3 powered web application that suggests recipes based on users preferred ingredients and exclusions. New suggestions are generated each time and user's are able to save recipes to their associated Google accounts.
 
 ## NOTE:
-Currently using temporariy premium hosting option from netifly, once finished, API fetching longer than 10s will cause an error.
+Currently using trial premium hosting option from netifly, once finished, API fetching longer than 10s will cause an error.
 
 ## Demo link:
 Access my site at [culinaryaiv2.netlify.app](https://culinaryaiv2.netlify.app/)
