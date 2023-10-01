@@ -25,9 +25,8 @@ I used `Next.js` for the frontend/backend (used API routing). `MongoDB` to store
 - run `npm run dev`
 
 ## Approach
-I wanted to integrate the power of AI endpoints to facilitate those who do not know what to do with scattered ingredients in theri fridges. I knew recipe makers already exist, but none use the power of AI to make 
-tailored suggestions towards the user. I hope to add more "options" for the user to select in the future (e.g. themed based recipes) alongside implementing a backend for users to save 
-some of their favorite recipes.
+I wanted to integrate the power of AI endpoints to facilitate those who do not know what to do with scattered ingredients in their fridges. I knew recipe makers already exist, but none use the power of AI to make 
+tailored suggestions towards the user. I hope to add a better UI for the recipe maker itself and more options, perhaps surrounding "themed" foods.
 
 ## Status
 Minimal viable product currently, plan to add more features surrounding recipe types and collaboration.
