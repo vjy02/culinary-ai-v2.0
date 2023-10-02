@@ -204,8 +204,8 @@ export default function ServerSidePage({ data }: { data: any }) {
                       <button className="py-3 px-4 text-2xl border">📋</button>
                     </CopyToClipboard>
                 </div>
-                <div className="whitespace-pre-wrap p-10" ref={printRef} >
-                  <h2 className="text-xl xl:text-2xl font-bold">{curRecipe.title}</h2>
+                <div className="whitespace-pre-wrap p-10 border" ref={printRef} >
+                  <h2 className="text-xl xl:text-2xl font-bold w-[80%]">{curRecipe.title}</h2>
                   <p>{curRecipe.content.split('\n').splice(1, curRecipe.content.length - 1).join('\n')}</p>
                 </div>
               </div>

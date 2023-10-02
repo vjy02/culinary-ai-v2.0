@@ -260,7 +260,7 @@ export default function GeneratorPage () {
                               </CopyToClipboard>
                             </div>
                             <div ref={printRef} className="whitespace-pre-wrap p-10">
-                                <h2 className="text-xl xl:text-2xl font-bold">{recipe.split('\n')[0].split(': ')[1]}</h2>
+                                <h2 className="text-xl xl:text-2xl font-bold w-[80%]">{recipe.split('\n')[0].split(': ')[1]}</h2>
                                 <p>{recipe.split('\n').splice(1, recipe.length - 1).join('\n')}</p>
                             </div>
                         </div>
