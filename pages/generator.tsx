@@ -256,7 +256,7 @@ export default function GeneratorPage () {
                                   content={() => printRef.current}
                               />
                               <CopyToClipboard text={recipe}>
-                                <button className="py-3 px-4 text-2xl border">📋</button>
+                                <button className="py-3 px-4 text-2xl border" onClick={()=>alert('Recipe copied!')}>📋</button>
                               </CopyToClipboard>
                             </div>
                             <div ref={printRef} className="whitespace-pre-wrap p-10">

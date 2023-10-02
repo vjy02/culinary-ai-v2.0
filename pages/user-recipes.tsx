@@ -201,7 +201,7 @@ export default function ServerSidePage({ data }: { data: any }) {
                         content={() => printRef.current}
                     />
                     <CopyToClipboard text={curRecipe.content}>
-                      <button className="py-3 px-4 text-2xl border">📋</button>
+                      <button className="py-3 px-4 text-2xl border" onClick={()=>alert('Recipe copied!')}>📋</button>
                     </CopyToClipboard>
                 </div>
                 <div className="whitespace-pre-wrap p-10 border" ref={printRef} >
