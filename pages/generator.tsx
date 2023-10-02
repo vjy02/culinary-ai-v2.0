@@ -3,6 +3,7 @@ import Layout from '../components/layout'
 import { getSession } from 'next-auth/react'
 import { TailSpin } from 'react-loader-spinner'
 import ReactToPrint from 'react-to-print'
+import CopyToClipboard from 'react-copy-to-clipboard'
 
 export default function GeneratorPage () {
   const [input, setInput] = useState<string>('')
@@ -192,7 +193,7 @@ export default function GeneratorPage () {
                             </button>
                     </div>
                 </div>
-                <div className="grid grid-rows-2 grid-cols-2 gap-5 md:grid-cols-4 md:grid-rows-1 md:gap-5 w-[90%] md:h-[15%] rounded-lg">
+                <div className="grid grid-rows-2 grid-cols-2 gap-5 md:grid-cols-3 md:grid-rows-1 md:gap-5 w-[90%] md:h-[15%] rounded-lg">
                     <button
                         className="py-2 px-4 rounded-lg border border-gray-300 text-l"
                         onClick={() => {
@@ -202,10 +203,6 @@ export default function GeneratorPage () {
                     >
                         🎲 <br></br> Random
                     </button>
-                      <ReactToPrint
-                          trigger={() => <button className="py-2 px-4 rounded-lg border border-gray-300 text-l">🖨️ <br></br> Print</button>}
-                          content={() => printRef.current}
-                      />
                     <button
                         onClick={submitRecipeToDb}
                         className="py-2 px-4 rounded-lg border border-gray-300 text-l"
@@ -227,7 +224,16 @@ export default function GeneratorPage () {
                 >
                     {
                         !loading && !recipe && (
-                            <div className="whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto" >
+                            <div className="relative whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto" >
+                                  <div className="absolute right-5 top-5 flex gap-2">
+                                    <ReactToPrint
+                                        trigger={() => <button className="py-3 px-4 text-2xl border">🖨️</button>}
+                                        content={() => printRef.current}
+                                    />
+                                    <CopyToClipboard text={recipe}>
+                                      <button className="py-3 px-4 text-2xl border">📋</button>
+                                    </CopyToClipboard>
+                                </div>
                                 <h2 className="text-xl xl:text-2xl font-bold">Example Recipe</h2>
                                 {"\nIngredients:\n- 2 units of main ingredient\n- 1 cup of secondary ingredient\n- 1/2 cup of flavor ingredient A\n- 1/2 teaspoon of spice A\n- 1/2 teaspoon of spice B\n- 1/4 teaspoon of seasoning A\n- 1/4 teaspoon of seasoning B\n- 2 units of binding ingredient\n- 1 cup of sauce ingredient\n- 1/2 cup of additional ingredient\n- Garnish ingredient, for garnish\n\nInstructions:\n1. Preheat the appliance to a specific temperature.\n2. In a container, mix secondary ingredient, flavor ingredient A, spice A, and spice B.\n3. Add seasoning A and seasoning B to the mixture and stir well.\n4. Dip each main ingredient into the binding ingredient, ensuring it's well-coated.\n5. Coat the main ingredient with the mixture from step 2.\n6. Cook for a set time.\n7. Pour sauce ingredient over the main ingredient.\n8. Sprinkle additional ingredient on top.\n9. Cook for an additional set time until golden brown.\n10. Garnish with garnish ingredient.\n11. Serve and enjoy!"}
                             </div>
@@ -243,7 +249,16 @@ export default function GeneratorPage () {
                         </div>
                     )}
                     {recipe && (
-                        <div className="rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh]">
+                        <div className="relative rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh]">
+                            <div className="absolute right-5 top-5 flex gap-2">
+                              <ReactToPrint
+                                  trigger={() => <button className="py-3 px-4 text-2xl border">🖨️</button>}
+                                  content={() => printRef.current}
+                              />
+                              <CopyToClipboard text={recipe}>
+                                <button className="py-3 px-4 text-2xl border">📋</button>
+                              </CopyToClipboard>
+                            </div>
                             <div ref={printRef} className="whitespace-pre-wrap p-10">
                                 <h2 className="text-xl xl:text-2xl font-bold">{recipe.split('\n')[0].split(': ')[1]}</h2>
                                 <p>{recipe.split('\n').splice(1, recipe.length - 1).join('\n')}</p>
