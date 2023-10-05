@@ -126,7 +126,7 @@ export default function ServerSidePage({ data }: { data: any }) {
         <div className="flex gap-3 flex-col items-center w-[100%] h-[72vh] md:h-[100%] md:w-[50%] pt-4 md:pt-6 rounded-lg border border-gray-300">
           {savedRecipes.length > 0 ? (
             <div className="flex flex-col md:flex-row justify-between items-between gap-10 w-[90%] md:h-[95%]">
-              <div className="flex flex-col gap-5 w-[90%]">
+              <div className="flex flex-col gap-5 w-[90%] md:min-w-[47%] md:max-w-[47%]">
                 <h1 className="text-xl xl:text-2xl font-bold">Favorites</h1>
                 <div className="border border-gray-300 flex flex-col items-center max-h-[25vh] min-h-[25vh] md:max-h-[63vh] md:min-h-[63vh] overflow-auto">
                   {savedRecipes.map((item: Recipe, i: number) => {
@@ -156,7 +156,7 @@ export default function ServerSidePage({ data }: { data: any }) {
                   }
                 </div>
               </div>
-              <div className="flex flex-col gap-5 w-[90%]">
+              <div className="flex flex-col gap-5 w-[90%] md:min-w-[47%] md:max-w-[47%]">
                 <h1 className="text-xl xl:text-2xl font-bold">All Recipes</h1>
                 <div className="border border-gray-300 flex flex-col items-center max-h-[25vh] min-h-[25vh] md:max-h-[63vh] md:min-h-[63vh] overflow-auto">
                   {savedRecipes.map((item: Recipe, i: number) => {
