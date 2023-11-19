@@ -4,7 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.25rem 0;
+  margin: 2em auto;
+  width: 85%;
 }
 
 .avatar {

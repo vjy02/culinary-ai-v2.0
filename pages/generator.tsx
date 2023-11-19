@@ -211,7 +211,7 @@ export default function GeneratorPage () {
                     </button>
                     <button
                         onClick={fetchOpenApi}
-                        className="py-2 px-4 rounded-lg border border-gray-300 text-l"
+                        className="py-2 px-4 rounded-lg border border-gray-300 text-l col-span-2 md:col-span-1"
                     >
                         ⚙️ <br></br>Generate
                     </button>
