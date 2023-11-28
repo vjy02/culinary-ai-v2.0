@@ -96,7 +96,7 @@ export default function GeneratorPage() {
 
   return (
     <Layout>
-      <div className="md:flex-row flex flex-col justify-between text-m sm:text-md  md:text-lg">
+      <div className="m-auto w-[85%] md:w-[95%] md:flex-row flex flex-col justify-between text-m sm:text-md  md:text-lg">
         <div
           id="generator-wrapper"
           className="flex flex-col justify-between items-center md:justify-around bg-white pb-5 h-[110vh] md:pb-0 md:w-[50%] md:h-[75vh] border-2 border-black-500 rounded-lg"
@@ -268,7 +268,7 @@ export default function GeneratorPage() {
               </div>
             )}
             {loading && (
-              <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh] rounded-lg border border-gray-300">
+              <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh]">
                 <TailSpin color="#c2c2c2" height={100} width={100} />
               </div>
             )}
@@ -291,7 +291,7 @@ export default function GeneratorPage() {
                   </CopyToClipboard>
                 </div>
                 <div ref={printRef} className="whitespace-pre-wrap p-10">
-                  <h2 className="text-xl xl:text-2xl font-bold w-[80%]">
+                  <h2 className="text-xl xl:text-2xl font-bold w-[60%] md:w-[80%]">
                     {recipe.split("\n")[0].split(": ")[1]}
                   </h2>
                   <p>

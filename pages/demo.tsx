@@ -100,17 +100,18 @@ export default function GeneratorPage() {
   }
 
   return (
+    <>
+    <a
+    href={`/api/auth/signout`}
+    className="absolute top-[5%] left-[5%] pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold"
+    onClick={(e) => {
+      e.preventDefault();
+      router.push("/");
+    }}
+  >
+    Back Home
+  </a>
     <div className="relative md:flex-row flex flex-col justify-between text-m sm:text-md  md:text-lg w-[90%] mt-[15vh] ml-auto mr-auto">
-      <a
-        href={`/api/auth/signout`}
-        className="absolute top-[-4%] md:top-[-15%] md:left-[0%] pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold"
-        onClick={(e) => {
-          e.preventDefault();
-          router.push("/");
-        }}
-      >
-        Back Home
-      </a>
 
       <div
         id="generator-wrapper"
@@ -270,14 +271,14 @@ export default function GeneratorPage() {
             </div>
           )}
           {loading && (
-            <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh] rounded-lg border border-gray-300">
+            <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh] md:rounded-lg md:border md:border-gray-300">
               <TailSpin color="#c2c2c2" height={100} width={100} />
             </div>
           )}
           {recipe && (
             <div className="relative rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh]">
               <div ref={printRef} className="whitespace-pre-wrap p-10">
-                <h2 className="text-xl xl:text-2xl font-bold w-[80%]">
+                <h2 className="text-xl xl:text-2xl font-bold w-[60%] md:w-[80%]">
                   {recipe.split("\n")[0].split(": ")[1]}
                 </h2>
                 <p>
@@ -292,5 +293,6 @@ export default function GeneratorPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

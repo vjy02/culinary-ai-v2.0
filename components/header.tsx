@@ -29,10 +29,7 @@ export default function Header() {
 
   return (
     <header>
-      <noscript>
-        <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
-      </noscript>
-      <div className={styles.loginHeader}>
+      <div className="w-[85%] md:w-[95%] flex justify-between items-center mt-[2em] mb-[2em] mr-auto ml-auto">
         <div className="w-[30vw]">
           {session && session.user && session.user.image ? (
             <Image src={session.user.image} height={50} width={50} alt="logo" />
@@ -40,11 +37,7 @@ export default function Header() {
             <Image src={logoIcon} height={145} width={145} alt="logo" />
           )}
         </div>
-        <p
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
+        <div>
           {!session && (
             <>
               <a
@@ -69,12 +62,12 @@ export default function Header() {
               </a>
             </>
           )}
-        </p>
+      </div>
       </div>
       <nav>
         {session?.user && (
-          <ul className={styles.navItems}>
-            <li className={styles.navItem}>
+          <ul className="p-0 list-none w-[85%] md:w-[95%] mt-[2em] mb-[2em] mr-auto ml-auto">
+            <li className="inline-block mr-[1rem]">
               <Link
                 href="/generator"
                 className={
@@ -86,7 +79,7 @@ export default function Header() {
                 Generator
               </Link>
             </li>
-            <li className={styles.navItem}>
+            <li className="inline-block mr-[1rem]">
               <Link
                 href="/user-recipes"
                 className={
