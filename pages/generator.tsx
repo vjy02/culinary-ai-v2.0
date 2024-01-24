@@ -247,7 +247,7 @@ export default function GeneratorPage() {
             className="flex flex-col items-end gap-10 md:self-start w-[100%]"
           >
             {!loading && !recipe && (
-              <div className="relative whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto">
+              <div className="relative whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto bg-white">
                 <div className="absolute right-5 top-5 flex gap-2">
                   <ReactToPrint
                     trigger={() => (
@@ -273,7 +273,7 @@ export default function GeneratorPage() {
               </div>
             )}
             {recipe && (
-              <div className="relative rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh]">
+              <div className="relative rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh] bg-white">
                 <div className="absolute right-5 top-5 flex gap-2">
                   <ReactToPrint
                     trigger={() => (

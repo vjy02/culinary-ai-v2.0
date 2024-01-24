@@ -18,8 +18,9 @@ body {
     "Segoe UI Emoji",
     "Segoe UI Symbol",
     "Noto Color Emoji";
-  background: #fff;
-  color: #333;
+
+    background-image: linear-gradient(rgb(240, 240, 240) .1rem, transparent .1rem), linear-gradient(90deg, rgb(241, 241, 241) .1rem, transparent .1rem);
+    background-size: 1rem 1rem;
 }
 
 li,

@@ -34,7 +34,7 @@ export default function IndexPage() {
             </p>
             <button
               onClick={() => router.push("/login")}
-              className="self-start pt-2 pb-2 pr-4 pl-4 md:pt-5 md:pb-5 md:pr-10 md:pl-10 rounded-lg bg-white-500 border-green-600 border-2 text-green-600 font-bold"
+              className="self-start pt-2 pb-2 pr-4 pl-4 md:pt-5 md:pb-5 md:pr-10 md:pl-10 rounded-lg bg-white border-green-600 border-2 text-green-600 font-bold"
             >
               Try Now!
             </button>
