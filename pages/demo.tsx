@@ -263,7 +263,7 @@ export default function GeneratorPage() {
           className="flex flex-col items-end gap-10 md:self-start w-[100%]"
         >
           {!loading && !recipe && (
-            <div className="relative whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto">
+            <div className="relative whitespace-pre-wrap md:w-[80%] md:max-h-[75vh] rounded-lg border border-gray-300 p-10 md:overflow-auto bg-white">
               <h2 className="text-xl xl:text-2xl font-bold">Example Recipe</h2>
               {
                 "\nIngredients:\n- 2 units of main ingredient\n- 1 cup of secondary ingredient\n- 1/2 cup of flavor ingredient A\n- 1/2 teaspoon of spice A\n- 1/2 teaspoon of spice B\n- 1/4 teaspoon of seasoning A\n- 1/4 teaspoon of seasoning B\n- 2 units of binding ingredient\n- 1 cup of sauce ingredient\n- 1/2 cup of additional ingredient\n- Garnish ingredient, for garnish\n\nInstructions:\n1. Preheat the appliance to a specific temperature.\n2. In a container, mix secondary ingredient, flavor ingredient A, spice A, and spice B.\n3. Add seasoning A and seasoning B to the mixture and stir well.\n4. Dip each main ingredient into the binding ingredient, ensuring it's well-coated.\n5. Coat the main ingredient with the mixture from step 2.\n6. Cook for a set time.\n7. Pour sauce ingredient over the main ingredient.\n8. Sprinkle additional ingredient on top.\n9. Cook for an additional set time until golden brown.\n10. Garnish with garnish ingredient.\n11. Serve and enjoy!"
@@ -271,12 +271,12 @@ export default function GeneratorPage() {
             </div>
           )}
           {loading && (
-            <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh] md:rounded-lg md:border md:border-gray-300">
+            <div className="flex justify-center items-center w-[100%] h-[100%] md:w-[80%] md:min-h-[75vh] md:rounded-lg ">
               <TailSpin color="#c2c2c2" height={100} width={100} />
             </div>
           )}
           {recipe && (
-            <div className="relative rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh]">
+            <div className="relative rounded-lg border border-gray-300 md:w-[80%] md:overflow-auto md:max-h-[75vh] bg-white">
               <div ref={printRef} className="whitespace-pre-wrap p-10">
                 <h2 className="text-xl xl:text-2xl font-bold w-[60%] md:w-[80%]">
                   {recipe.split("\n")[0].split(": ")[1]}
