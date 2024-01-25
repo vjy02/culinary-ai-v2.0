@@ -212,7 +212,7 @@ export default function ServerSidePage({ data }: { data: any }) {
         </div>
         <div className="max-h-[70%] w-[85%] m-auto mt-10 md:mt-0 md:w-[40%] bg-white">
           {savedRecipes.length > 0 ? (
-            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto md:max-h-[75vh]">
+            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto md:max-h-[75vh] bg-white">
               <div className="relative whitespace-pre-wrap">
                 <div className="absolute right-5 top-5 flex gap-2">
                   <ReactToPrint

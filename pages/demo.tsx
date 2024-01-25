@@ -100,7 +100,7 @@ export default function GeneratorPage() {
   }
 
   return (
-    <>
+    <div className="generator-background absolute">
     <a
     href={`/api/auth/signout`}
     className="absolute top-[5%] left-[5%] pt-2 pb-2 pr-4 pl-4 md:pt-3 md:pb-3 md:pr-5 md:pl-5 rounded-lg bg-green-500 text-white font-bold"
@@ -293,6 +293,6 @@ export default function GeneratorPage() {
         </div>
       </div>
     </div>
-    </>
+    </div>
   );
 }

@@ -18,9 +18,6 @@ body {
     "Segoe UI Emoji",
     "Segoe UI Symbol",
     "Noto Color Emoji";
-
-    background-image: linear-gradient(rgb(240, 240, 240) .1rem, transparent .1rem), linear-gradient(90deg, rgb(241, 241, 241) .1rem, transparent .1rem);
-    background-size: 1rem 1rem;
 }
 
 li,
@@ -34,4 +31,11 @@ a {
 
 hr {
   border: 1px solid #ddd;
+}
+
+.generator-background{
+  background-image: linear-gradient(rgb(240, 240, 240) .1rem, transparent .1rem), linear-gradient(90deg, rgb(241, 241, 241) .1rem, transparent .1rem);
+  background-size: 1rem 1rem;
+  width: 100vw;
+  height: 100vh;
 }

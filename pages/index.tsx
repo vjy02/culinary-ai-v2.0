@@ -1,4 +1,4 @@
-import Layout from "../components/layout";
+import Header from "../components/header";
 import foodImg from "../public/images/FooterBowl_Small.webp";
 import Image from "next/image";
 import foodTag from "../public/images/foodTag.png";
@@ -8,9 +8,10 @@ export default function IndexPage() {
   const router = useRouter();
 
   return (
-    <Layout>
-      <div className="flex justify-center w-[100%] h-[90vh] md:h-[80vh] text-lg sm:text-xl md:text-2xl">
-        <div className="flex flex-col md:flex-row items-center justify-around md:justify-between w-[85%]">
+    <div>
+      <Header />
+      <div className="z-1 flex justify-center w-[100%] h-[90vh] md:h-[80vh] text-lg sm:text-xl md:text-2xl">
+        <div className="flex flex-col md:flex-row items-center justify-around md:justify-between w-[70%]">
           <div className="align-self-start flex flex-col md:w-[40%] gap-5 md:gap-10 mb-[5%]">
             <h1 className="text-2xl lg:text-4xl font-bold">
               Infinite flavors with <br />
@@ -39,7 +40,7 @@ export default function IndexPage() {
               Try Now!
             </button>
           </div>
-          <div className="relative md:w-[45%] md:h-[80%]">
+          <div className="relative md:w-[40%] md:h-[80%]">
             <Image src={foodImg} alt="food" height={600} width={600}></Image>
             <div className="absolute left-[-15%] md:bottom-[-20%] md:left-[-25%] w-[50%]">
               <Image
@@ -52,6 +53,6 @@ export default function IndexPage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
