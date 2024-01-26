@@ -204,7 +204,7 @@ export default function ServerSidePage({ data }: { data: any }) {
               </div>
             </div>
           ) : (
-            <h2>
+            <h2 className="text-2xl text-center">
               No recipes saved! Generate a recipe and click save for it to
               appear
             </h2>
@@ -244,7 +244,7 @@ export default function ServerSidePage({ data }: { data: any }) {
               </div>
             </div>
           ) : (
-            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto h-[75vh] flex items-center justify-center">
+            <div className="rounded-lg border border-gray-300 md:w-[100%] md:overflow-auto h-[75vh] flex items-center justify-center bg-white">
               <h1 className="text-xl xl:text-3xl font-bold">
                 No Saved Recipes!
               </h1>
