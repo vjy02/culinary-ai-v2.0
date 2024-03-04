@@ -11,7 +11,7 @@ export default async function handler(
   const { ingredients, diet } = req.body;
 
   const APIBody = {
-    model: "gpt-3.5-turbo-16k-0613",
+    model: "gpt-3.5-turbo", // Updated model version
     messages: [
       {
         role: "user",
@@ -25,7 +25,6 @@ export default async function handler(
       },
     ],
     temperature: 0.7,
-    max_tokens: 1000,
     top_p: 0.9,
     frequency_penalty: -0.2,
     presence_penalty: 0.2,
