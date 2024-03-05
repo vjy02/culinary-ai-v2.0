@@ -6,7 +6,7 @@ CulinaryAI is a Chat-GPT3 powered web application that suggests recipes based on
 
 ## Features
 - **Unique recipe generations:** CulinaryAI generates unique recipes based on user's input ingredients and diet.
-- **Favoriting, copying and printing recipes:** With a click of a button the user has endless options to makes sure their favorite recipe's are available to come back to, copy, print or send to tohers.
+- **Favoriting, copying and printing recipes:** With a click of a button the user has endless options to makes sure their favorite recipe's are available to come back to, copy, print or send to others.
 - **Google OAuth Integration:** Users can use their own Google account for a secure and fast way to access their CulinaryAI account.
 - **User recipe database:** Users can reliably save their desired recipes to our MongoDB database, ensuring your creations are readily available to come back to.
 
